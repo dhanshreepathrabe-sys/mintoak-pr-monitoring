@@ -1,0 +1,12 @@
+{
+  "name": "mintoak-pr-monitoring",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PR Monitoring Dashboard for Mintoak (Mintoak Innovations Pvt. Ltd.) — media mentions, social listening, and sentiment analysis.",
+  "type": "module",
+  "scripts": {
+    "build:data": "node scripts/build-data.mjs",
+    "verify:links": "node scripts/verify-links.mjs && node scripts/build-data.mjs",
+    "start": "node scripts/build-data.mjs && npx --yes serve -l 5173 ."
+  }
+}

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mintoak — PR Monitoring Dashboard</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2348821c'/%3E%3Ctext x='16' y='22' font-size='16' font-family='sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <!-- Vendored locally in vendor/ (Chart.js 4.5.1, jsPDF 4.2.1) so the dashboard has no external CDN dependency at runtime. -->
+  <script src="vendor/chart.umd.min.js"></script>
+  <script src="vendor/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="mark">M</div>
+        <div>
+          Mintoak PR Monitor
+          <div class="sub">Public relations &amp; social listening</div>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <div class="refresh-indicator">
+          <span class="refresh-dot"></span>
+          <span id="refresh-label">Updated just now</span>
+        </div>
+        <button id="refresh-now" class="icon-btn">↻ Refresh now</button>
+        <button id="export-pdf" class="icon-btn">⬇ Export PDF</button>
+        <button id="theme-toggle" class="icon-btn">● Dark</button>
+      </div>
+    </header>
+
+    <div class="filterbar">
+      <div class="range-group">
+        <button class="range-btn" data-range="today">Today</button>
+        <button class="range-btn" data-range="7d">Last 7 Days</button>
+        <button class="range-btn active" data-range="30d">Last 30 Days</button>
+        <button class="range-btn" data-range="ytd">YTD</button>
+        <button class="range-btn" data-range="custom">Custom</button>
+      </div>
+      <div id="custom-range-wrap" class="custom-range" style="display:none;">
+        <input type="date" id="custom-start" />
+        <span>to</span>
+        <input type="date" id="custom-end" />
+      </div>
+      <div class="filter-spacer"></div>
+      <div class="scope-note" id="scope-count">—</div>
+    </div>
+
+    <nav class="tabnav">
+      <button class="tab-btn active" data-tab="overview">Overview</button>
+      <button class="tab-btn" data-tab="live-mentions">Live Mentions</button>
+      <button class="tab-btn" data-tab="social-listings">Social Listings</button>
+      <button class="tab-btn" data-tab="sentiment">Sentiment Analysis</button>
+    </nav>
+
+    <main class="content">
+      <section id="panel-overview" class="tab-panel active">
+        <div id="metric-grid" class="metric-grid"></div>
+        <div class="panel-grid">
+          <div class="panel">
+            <h3>Mentions over time</h3>
+            <div class="panel-sub">Volume of Mintoak coverage across the selected timeframe.</div>
+            <div class="chart-wrap"><canvas id="chart-mentions-over-time"></canvas></div>
+          </div>
+          <div class="panel">
+            <h3>Mention volume by platform</h3>
+            <div class="panel-sub">News/PR source types plus social platforms.</div>
+            <div class="chart-wrap"><canvas id="chart-platform-volume"></canvas></div>
+          </div>
+        </div>
+        <div class="panel-grid">
+          <div class="panel">
+            <h3>Top trending keywords</h3>
+            <div class="panel-sub">Most frequent topic terms across in-range headlines.</div>
+            <div class="tagbar" id="keyword-tagbar"></div>
+          </div>
+          <div class="panel">
+            <h3>Summary</h3>
+            <div class="panel-sub">Auto-generated from in-range coverage, grouped by topic.</div>
+            <ul class="summary-list" id="summary-feed"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="panel-live-mentions" class="tab-panel"></section>
+      <section id="panel-social-listings" class="tab-panel"></section>
+      <section id="panel-sentiment" class="tab-panel"></section>
+    </main>
+
+    <div class="footer-note">
+      Mintoak PR Monitoring Dashboard — see README.md for data sources, the context-disambiguation filter, and how to connect live news/social APIs.
+    </div>
+  </div>
+
+  <script src="js/data.generated.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/sentiment.js"></script>
+  <script src="js/dedupe.js"></script>
+  <script src="js/linkVerify.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/tabs/overview.js"></script>
+  <script src="js/tabs/liveMentions.js"></script>
+  <script src="js/tabs/socialListings.js"></script>
+  <script src="js/tabs/sentimentTab.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
