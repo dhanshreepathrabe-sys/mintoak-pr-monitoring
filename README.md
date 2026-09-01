@@ -30,34 +30,36 @@ egress** (outbound HTTP to arbitrary domains — news sites, social APIs — is
 blocked by network policy; only package registries and Anthropic's own
 search tool are reachable). That shaped two decisions:
 
-1. **`data/mentions.seed.json`** — 58 real Mintoak media mentions (40
-   distinct stories after dedup), sourced via web search across roughly 40
+1. **`data/mentions.seed.json`** — 67 real Mintoak media mentions (45
+   distinct stories after dedup), sourced via web search across roughly 45
    outlets: Business Standard, Inc42, Entrackr, PR Newswire (US/UK), The
    Paypers, TradingView, Manila Times, CXOToday, FinTech Magazine, FinTech
    Futures, YourStory, Entrepreneur India, Adgully, IndiaInfoline, AOL, IBS
    Intelligence, Mediabrief, Analytics Insight, The Tribune, Indian Startup
    News, SiliconIndia, Elets BFSI, ANI, LatestLY, GCC Business News, Outlook
    Business, Business Today, Siasat Daily, India New England News, Finance
-   Outlook India, Startup Story, Indian Startup Times, TheIndiaBizz,
-   Startup News FYI, Investing.com/IANS, Axis Bank's own newsroom, and
-   PayPal's own newsroom. Covers the ICC Loyalty acquisition (including
+   Outlook India, IPO Central, Startup Story, Indian Startup Times,
+   TheIndiaBizz, Startup News FYI, Investing.com/IANS, Marca Money, APN
+   News, Passionate In Marketing, Shopifreaks, Axis Bank's own newsroom,
+   and PayPal's own newsroom. Covers the ICC Loyalty acquisition (including
    Entrackr's early scoop months before the official announcement, and the
    BlackSoil debt financing behind it), the Digiledge (CBDC/bill-payments)
    acquisition, the Visa partnership, the Axis Bank "neo for merchants"
-   launch and partnership announcement, the May-2024 SEA/MENA leadership
-   expansion, four separate funding events (the 2021 and Dec-2022 HDFC
-   stakes, the Feb-2023 $20M PayPal-led Series A, the Jan-2025 Z3Partners
-   secondary, and the Dec-2025 Series A extension at a $280M valuation),
-   and several leadership profiles/interviews of CEO Raman Khanduja. URLs
-   are real and were returned by web search, but this sandbox could not
-   perform the live HTTP status check itself (see **Link verification**
-   below) — run `npm run verify:links` from a machine with normal internet
-   access before trusting the "Link status" badge in production.
+   launch and the separate SME partnership announcement, the May-2024
+   SEA/MENA leadership expansion, four separate funding events (the 2021
+   and Dec-2022 HDFC stakes, the Feb-2023 $20M PayPal-led Series A, the
+   Jan-2025 Z3Partners secondary, and the Dec-2025 Series A extension at a
+   $280M valuation), and several leadership profiles/interviews of CEO
+   Raman Khanduja. URLs are real and were returned by web search, but this
+   sandbox could not perform the live HTTP status check itself (see **Link
+   verification** below) — run `npm run verify:links` from a machine with
+   normal internet access before trusting the "Link status" badge in
+   production.
 2. **`data/social.seed.json`** — Social Listings has **no authenticated
    platform API** (checked: none of the connected marketing tools —
    Supermetrics, Windsor.ai, Porter Metrics — have a real Mintoak social
    account authorized), so instead of fabricating engagement metrics, these
-   are **10 real, third-party-only posts found via public web search**
+   are **9 real, third-party-only posts found via public web search**
    (`site:linkedin.com`, `site:youtube.com`, `site:facebook.com`, etc.)
    across LinkedIn, YouTube and Facebook — each with `metricsAvailable:
    false`, so the UI shows "Engagement data unavailable" rather than a
@@ -66,14 +68,18 @@ search tool are reachable). That shaped two decisions:
    deliberately excluded** — the team already knows what it publishes
    itself, so an earlier pass that filled this tab mostly with Mintoak's
    own posts (tagged `authorTier: "Owned Channel"`) was the wrong shape for
-   a listening feed; those records were removed. What remains is real
-   outside voices — `VentureDesk`, `StartupRo`, `The CEO Magazine India`,
-   individual creators, a personal post from one of Mintoak's own
-   newly-hired regional leads, YourStory's own Facebook page sharing its
-   coverage, and third-party podcast/interview videos — still thin,
-   because public search indexes very little third-party chatter about a
-   B2B merchant-payments platform, and no Reddit mentions were found at
-   all. Every post carries its **actual publish date**: `dateConfidence:
+   a listening feed; those records were removed. A VentureDesk LinkedIn
+   post was also removed after the user reported the link no longer
+   resolves — a reminder that "found via search" isn't the same as "still
+   live," which is exactly what the (currently unautomated) link
+   verification step in this project exists to catch. What remains is real
+   outside voices — `StartupRo`, `The CEO Magazine India`, individual
+   creators, a personal post from one of Mintoak's own newly-hired
+   regional leads, YourStory's own Facebook page sharing its coverage, and
+   third-party podcast/interview videos — still thin, because public
+   search indexes very little third-party chatter about a B2B
+   merchant-payments platform, and no Reddit mentions were found at all.
+   Every post carries its **actual publish date**: `dateConfidence:
    "exact"` when a search result stated it directly, `"estimated"` when
    it's a well-reasoned estimate anchored to the news event the post is
    visibly reacting to (the platform's own timestamp wasn't visible in
@@ -82,12 +88,12 @@ search tool are reachable). That shaped two decisions:
    record as web-search-sourced rather than API-sourced.
 
 **On "1210+ social listings and 50+ mentions"**: 50+ real mentions turned
-out to be findable — the 61 raw / 42 distinct here clear it. 1210+ social
+out to be findable — the 67 raw / 45 distinct here clear it. 1210+ social
 listings did not, and realistically can't via web search: individual
 posts on X, Instagram and (mostly) LinkedIn aren't search-engine-indexed
 at the level of a specific status update — search surfaces a company's
 profile pages, its more prominent public posts, and syndicated news-media
-social shares, which is exactly what these 10 (third-party-only) records
+social shares, which is exactly what these 9 (third-party-only) records
 are. A number like 1,210 is the shape of what a real social-listening API
 (X API v2, LinkedIn, Meltwater, Brandwatch, Sprinklr, etc.) returns — it
 counts things like replies, retweets-with-comment and

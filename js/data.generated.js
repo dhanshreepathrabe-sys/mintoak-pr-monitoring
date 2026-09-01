@@ -732,6 +732,78 @@ const MENTIONS_SEED = [
     "publishedDate": "2026-08-04",
     "domain": "indiasnews.net",
     "topic": "M&A / Acquisition"
+  },
+  {
+    "id": "m-2025-01-axis-ibsi",
+    "source": "IBS Intelligence",
+    "sourceType": "News",
+    "author": "IBS Intelligence Editorial",
+    "headline": "Mintoak & Axis Bank to simplify merchant payments and business solutions",
+    "snippet": "Syndicated coverage of the Mintoak-Axis Bank partnership enabling SMEs to accept payments and access business solutions through Mintoak's white-labelled platform.",
+    "url": "https://ibsintelligence.com/ibsi-news/mintoak-axis-bank-to-simplify-merchant-payments-and-business-solutions/",
+    "publishedDate": "2025-01-22",
+    "domain": "ibsintelligence.com",
+    "topic": "Bank / Network Partnership"
+  },
+  {
+    "id": "m-2025-01-axis-marcamoney",
+    "source": "Marca Money",
+    "sourceType": "News",
+    "author": "Marca Money Desk",
+    "headline": "Mintoak partners with Axis Bank to offer SMEs merchant payment solutions",
+    "snippet": "Syndicated coverage of the Mintoak-Axis Bank SME partnership announcement.",
+    "url": "https://www.marcamoney.com/mintoak-partners-with-axis-bank-to-offer-smes-merchant-payment-solutions/",
+    "publishedDate": "2025-01-22",
+    "domain": "marcamoney.com",
+    "topic": "Bank / Network Partnership"
+  },
+  {
+    "id": "m-2025-01-axis-apnnews",
+    "source": "APN News",
+    "sourceType": "News",
+    "author": "APN News Desk",
+    "headline": "Mintoak announces partnership with Axis Bank to enable SMEs with merchant payments and business solutions",
+    "snippet": "Syndicated coverage of the Mintoak-Axis Bank SME partnership announcement.",
+    "url": "https://www.apnnews.com/mintoak-announces-partnership-with-axis-bank-to-enable-smes-with-merchant-payments-and-business-solutions/",
+    "publishedDate": "2025-01-22",
+    "domain": "apnnews.com",
+    "topic": "Bank / Network Partnership"
+  },
+  {
+    "id": "m-2025-01-axis-passionateinmarketing",
+    "source": "Passionate In Marketing",
+    "sourceType": "News",
+    "author": "Passionate In Marketing Desk",
+    "headline": "Mintoak announces partnership with Axis Bank to enable SMEs with merchant payments and business solutions",
+    "snippet": "Syndicated coverage of the Mintoak-Axis Bank SME partnership announcement.",
+    "url": "https://www.passionateinmarketing.com/mintoak-announces-partnership-with-axis-bank-to-enable-smes-with-merchant-payments-and-business-solutions/",
+    "publishedDate": "2025-01-22",
+    "domain": "passionateinmarketing.com",
+    "topic": "Bank / Network Partnership"
+  },
+  {
+    "id": "m-2025-12-26-funding2500cr-ipocentral",
+    "source": "IPO Central",
+    "sourceType": "News",
+    "author": "IPO Central Desk",
+    "headline": "PayPal-Backed Merchant SaaS Startup Mintoak Eyes ₹53.3 Cr In Fresh Funding Round",
+    "snippet": "Coverage of Mintoak's Rs 53.3 crore Series A extension from PayPal Ventures and Pravega Ventures, valuing the company at around Rs 2,500 crore post-money; FY25 revenue grew 27.9% to Rs 92.85 crore.",
+    "url": "https://ipocentral.in/mintoak-series-a-funding/",
+    "publishedDate": "2025-12-26",
+    "domain": "ipocentral.in",
+    "topic": "Funding"
+  },
+  {
+    "id": "m-2026-08-04-icc-shopifreaks",
+    "source": "Shopifreaks",
+    "sourceType": "News",
+    "author": "Shopifreaks Desk",
+    "headline": "Mintoak acquires Dubai-based ICC Loyalty to add card rewards and issuing-side tools to its merchant payments platform for banks",
+    "snippet": "Coverage of the ICC Loyalty acquisition, framing it as adding card rewards and issuing-side tooling to Mintoak's bank-facing merchant payments platform.",
+    "url": "https://www.shopifreaks.com/mintoak-acquires-dubai-based-icc-loyalty-to-add-card-rewards-and-issuing-side-tools-to-its-merchant-payments-platform-for-banks/",
+    "publishedDate": "2026-08-04",
+    "domain": "shopifreaks.com",
+    "topic": "M&A / Acquisition"
   }
 ];
 const SOCIAL_SEED = {
@@ -774,19 +846,6 @@ const SOCIAL_SEED = {
       "url": "https://www.youtube.com/watch?v=qtXNe7I0C8s",
       "publishedDate": "2025-09-05",
       "dateConfidence": "exact",
-      "metricsAvailable": false
-    },
-    {
-      "id": "s-li-venturedesk-icc",
-      "platform": "LinkedIn",
-      "authorName": "VentureDesk",
-      "authorHandle": "venturedesk",
-      "authorTier": "Industry Leader",
-      "verified": false,
-      "postText": "Mintoak Acquires ICC Loyalty for Rs 80 Crore — third-party deal-tracking post naming a specific acquisition value not stated in Mintoak's own press materials. Hashtagged #Mintoak #BlackSoil, tying it to the BlackSoil debt-financing story.",
-      "url": "https://www.linkedin.com/posts/venturedesk_venturedesk-mintoak-blacksoil-activity-7434476581030490112-W3Ot",
-      "publishedDate": "2026-08-08",
-      "dateConfidence": "estimated",
       "metricsAvailable": false
     },
     {
