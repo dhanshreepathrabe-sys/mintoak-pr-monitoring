@@ -1,7 +1,7 @@
 let socialUiState = { platform: "all", tier: "all" };
 
 const PLATFORMS = ["X", "LinkedIn", "YouTube", "Reddit", "Instagram", "Facebook"];
-const TIERS = ["Owned Channel", "Verified", "High Reach", "Industry Leader", "General"];
+const TIERS = ["Verified", "High Reach", "Industry Leader", "General"];
 
 function renderSocialControls() {
   return `
@@ -27,8 +27,14 @@ function filterSocialPosts(posts) {
 }
 
 function socialDateLabel(p) {
-  const d = new Date(p.effectiveDate).toLocaleDateString(undefined, { month: "short", day: "numeric" });
-  return p.dateConfidence === "exact" ? d : `Found ${d}`;
+  const d = new Date(p.publishedDate).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+  return p.dateConfidence === "exact" ? d : `~${d}`;
+}
+
+function socialDateTitle(p) {
+  return p.dateConfidence === "exact"
+    ? "Publish date confirmed by the source"
+    : "Estimated: the platform's own timestamp wasn't visible in search results, so this is anchored to the news event the post is visibly reacting to";
 }
 
 function socialCardHtml(p) {
@@ -55,7 +61,7 @@ function socialCardHtml(p) {
         ${p.metricsAvailable
           ? `<span><b>${p.likes}</b> likes</span><span><b>${p.comments}</b> comments</span><span><b>${p.shares}</b> shares</span><span><b>${p.engagementRate}%</b> engagement</span>`
           : `<span title="No social API is connected, so engagement counts aren't available for this post.">Engagement data unavailable</span>`}
-        <span style="margin-left:auto;">${socialDateLabel(p)}</span>
+        <span style="margin-left:auto;" title="${socialDateTitle(p)}">${socialDateLabel(p)}</span>
       </div>
     </div>
   `;
@@ -68,12 +74,16 @@ function renderSocialListingsTab(state) {
   panel.innerHTML = `
     <div class="panel" style="margin-bottom:16px; background:var(--surface-alt);">
       <strong>How this data was gathered.</strong> No X, LinkedIn, YouTube, Reddit or Instagram API is
-      authenticated for Mintoak yet, so these cards are real posts found via public web search rather than a
-      connected social listening feed. Two honest gaps that come with that: engagement counts (likes/comments/
-      shares) aren't visible in search results, so they're marked unavailable rather than guessed; and most
-      results are Mintoak's own official posts, since public search indexes very little third-party chatter
-      about a B2B merchant-payments platform (no Reddit mentions were found at all). See README →
-      "Connecting Live Data" to wire up a real API for full engagement metrics and broader third-party reach.
+      authenticated for Mintoak yet, so these cards are real, third-party-only posts found via public web
+      search rather than a connected social listening feed. Mintoak's own website and its own official
+      LinkedIn/X/Instagram/Facebook/YouTube posts are deliberately excluded — this feed is for outside
+      listening, not a mirror of what the team already publishes. Dates are the post's actual publish date
+      (marked "~" when it's a well-reasoned estimate anchored to the news event the post is visibly reacting
+      to, because the platform's own timestamp wasn't visible in search results — hover a date for why).
+      Engagement counts (likes/comments/shares) aren't visible in search results either, so they're marked
+      unavailable rather than guessed. Third-party chatter about a B2B merchant-payments platform is
+      genuinely thin online — no Reddit mentions were found at all. See README → "Connecting Live Data" to
+      wire up a real API for full engagement metrics and broader third-party reach.
     </div>
     ${renderSocialControls()}
     <div class="social-grid">

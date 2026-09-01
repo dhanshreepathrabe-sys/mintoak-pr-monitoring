@@ -52,10 +52,6 @@ function loadRawSocial() {
   return (typeof SOCIAL_SEED !== "undefined" ? SOCIAL_SEED.posts : []);
 }
 
-function getSocialDiscoveryDate() {
-  return (typeof SOCIAL_SEED !== "undefined" && SOCIAL_SEED.discoveryDate) || new Date().toISOString().slice(0, 10);
-}
-
 function getAllMentions() {
   const raw = loadRawMentions();
   const relevant = filterRelevantMentions(raw);
@@ -64,15 +60,16 @@ function getAllMentions() {
 }
 
 /**
- * Social posts are real (found via web search), but many don't carry a
- * verifiable exact publish date. `effectiveDate` is what drives the
- * date-range filter and timeline placement: the real publishedDate when
- * known, otherwise the date this crawl discovered the post — never a
- * guessed publish date. `dateConfidence` tells the UI which one it's
- * showing so the card can say "Discovered ..." instead of "Published ...".
+ * Social posts are real, third-party-only (Mintoak's own channels are
+ * excluded — see data/social.seed.json). Every post carries its actual
+ * publish date: `dateConfidence: "exact"` when a search result stated it
+ * directly, `"estimated"` when it's a well-reasoned estimate anchored to
+ * the news event the post is visibly reacting to (the platform's own
+ * timestamp wasn't visible in search results). Never a crawl/discovery
+ * date — `publishedDate` is what drives both the date-range filter and
+ * the card display.
  */
 function getAllSocialPosts() {
-  const discoveryDate = getSocialDiscoveryDate();
   return loadRawSocial()
     .map((p) => {
       const sentiment = scoreSentiment(p.postText);
@@ -80,11 +77,10 @@ function getAllSocialPosts() {
         ...p,
         url: scrubUrl(p.url),
         sentiment: sentiment.label,
-        sentimentConfidence: sentiment.confidence,
-        effectiveDate: p.publishedDate || discoveryDate
+        sentimentConfidence: sentiment.confidence
       };
     })
-    .sort((a, b) => new Date(b.effectiveDate) - new Date(a.effectiveDate));
+    .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
 }
 
 /**

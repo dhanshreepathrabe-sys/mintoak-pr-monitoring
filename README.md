@@ -57,37 +57,54 @@ search tool are reachable). That shaped two decisions:
    platform API** (checked: none of the connected marketing tools —
    Supermetrics, Windsor.ai, Porter Metrics — have a real Mintoak social
    account authorized), so instead of fabricating engagement metrics, these
-   are **21 real posts found via public web search** (`site:linkedin.com`,
-   `site:youtube.com`, `site:facebook.com`, etc.) across LinkedIn, X,
-   YouTube, Instagram and Facebook — each with `metricsAvailable: false`,
-   so the UI shows "Engagement data unavailable" rather than a made-up
-   like/comment count. Most are Mintoak's own official posts
-   (`authorTier: "Owned Channel"`), but a search pass specifically for
-   third-party chatter (`VentureDesk`, `StartupRo`, `The CEO Magazine
-   India`, individual creators, Mintoak's own newly-hired regional leads
-   posting personally, YourStory's own Facebook page sharing its coverage)
-   surfaced several genuine outside voices too — still thin, because
-   public search indexes very little third-party chatter about a B2B
-   merchant-payments platform, and no Reddit mentions were found at all.
-   Where the exact publish date wasn't visible in search results,
-   `dateConfidence: "discovered"` and the post is placed on the timeline by
-   the date this crawl found it (`discoveryDate`), not a guessed publish
-   date. A `WEB SEARCH` badge in the UI marks every record accordingly.
+   are **10 real, third-party-only posts found via public web search**
+   (`site:linkedin.com`, `site:youtube.com`, `site:facebook.com`, etc.)
+   across LinkedIn, YouTube and Facebook — each with `metricsAvailable:
+   false`, so the UI shows "Engagement data unavailable" rather than a
+   made-up like/comment count. **Mintoak's own official channels (its
+   website, and its own LinkedIn/X/Instagram/Facebook/YouTube posts) are
+   deliberately excluded** — the team already knows what it publishes
+   itself, so an earlier pass that filled this tab mostly with Mintoak's
+   own posts (tagged `authorTier: "Owned Channel"`) was the wrong shape for
+   a listening feed; those records were removed. What remains is real
+   outside voices — `VentureDesk`, `StartupRo`, `The CEO Magazine India`,
+   individual creators, a personal post from one of Mintoak's own
+   newly-hired regional leads, YourStory's own Facebook page sharing its
+   coverage, and third-party podcast/interview videos — still thin,
+   because public search indexes very little third-party chatter about a
+   B2B merchant-payments platform, and no Reddit mentions were found at
+   all. Every post carries its **actual publish date**: `dateConfidence:
+   "exact"` when a search result stated it directly, `"estimated"` when
+   it's a well-reasoned estimate anchored to the news event the post is
+   visibly reacting to (the platform's own timestamp wasn't visible in
+   search results) — shown in the UI with a `~` prefix and an explanatory
+   hover, never a crawl/discovery date. A `WEB SEARCH` badge marks every
+   record as web-search-sourced rather than API-sourced.
 
 **On "1210+ social listings and 50+ mentions"**: 50+ real mentions turned
-out to be findable — the 58 raw / 40 distinct here clear it. 1210+ social
+out to be findable — the 61 raw / 42 distinct here clear it. 1210+ social
 listings did not, and realistically can't via web search: individual
 posts on X, Instagram and (mostly) LinkedIn aren't search-engine-indexed
 at the level of a specific status update — search surfaces a company's
 profile pages, its more prominent public posts, and syndicated news-media
-social shares, which is exactly what these 21 records are. A number like
-1,210 is the shape of what a real social-listening API (X API v2,
-LinkedIn, Meltwater, Brandwatch, Sprinklr, etc.) returns — it counts
-things like replies, retweets-with-comment and impressions-adjacent
-mentions that a search index was never built to surface individually.
-Wiring one of those up (see **Connecting live data** below) is the actual
-path to that number; no further web-search crawling will get there
-honestly.
+social shares, which is exactly what these 10 (third-party-only) records
+are. A number like 1,210 is the shape of what a real social-listening API
+(X API v2, LinkedIn, Meltwater, Brandwatch, Sprinklr, etc.) returns — it
+counts things like replies, retweets-with-comment and
+impressions-adjacent mentions that a search index was never built to
+surface individually. Wiring one of those up (see **Connecting live
+data** below) is the actual path to that number; no further web-search
+crawling will get there honestly.
+
+**A word on the connected Google Drive**: it was checked for real PR
+agency material per a later request, and turned up files that look like
+agency reporting but show strong signs of AI fabrication (identical URLs
+reused across different "publications," fabricated news-outlet domains,
+a "PR Analysis" doc whose citation links literally carry
+`?utm_source=chatgpt.com`). Only the handful of items independently
+re-verified via web search (with the *real* URLs, not the file's) were
+added — a 1,202-row "regional pickups" report in that Drive was not
+imported at all. Worth raising directly with whoever produced it.
 
 ## Strict context-disambiguation filter
 
@@ -182,7 +199,7 @@ sources can be swapped in without touching the UI layer:
 | Interface | File | Replace with |
 |---|---|---|
 | `loadRawMentions()` | `js/data.js` | A real news/PR aggregation API — e.g. NewsAPI, Meltwater, Brandwatch, Google Alerts RSS, or a custom crawler — returning the same `{ id, source, sourceType, author, headline, snippet, url, publishedDate, domain, topic }` shape. |
-| `loadRawSocial()` | `js/data.js` | X API v2, LinkedIn Marketing API, YouTube Data API v3, Reddit API (PRAW/OAuth), Instagram Graph API — normalized to the `social.seed.json` shape (drop `metricsAvailable: false` once real engagement numbers are available). |
+| `loadRawSocial()` | `js/data.js` | X API v2, LinkedIn Marketing API, YouTube Data API v3, Reddit API (PRAW/OAuth), Instagram Graph API — normalized to the `social.seed.json` shape (drop `metricsAvailable: false` once real engagement numbers are available). Filter out the account's own posts at the query level (e.g. exclude Mintoak's own author/account IDs) — this tab is for third-party listening, not a mirror of owned-channel output. |
 | `scoreSentiment(text)` | `js/sentiment.js` | A real NLP/LLM sentiment endpoint (must still return `{ label, confidence }`). |
 | `scripts/verify-links.mjs` | — | Already production-ready; just needs to run somewhere with outbound internet (cron/CI), on a schedule matching your refresh cadence. |
 | `SOV_COMPETITOR_BASELINE` | `js/data.js` | Replace the illustrative multiplier with a real named-competitor mention count from the same pipeline. |

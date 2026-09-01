@@ -1,73 +1,6 @@
 {
-  "_notice": "REAL posts, discovered via public web search (no authenticated social API is connected — see README > Connecting Live Data). Two honest limitations: (1) engagement metrics (likes/comments/shares) are not visible in search results without platform API access, so metricsAvailable is false and the UI shows that instead of a number — nothing here is an invented metric; (2) most results are Mintoak's own official channel posts, because public search indexes very little third-party chatter about a B2B merchant-payments platform (X/Twitter in particular barely indexes individual posts, and no Reddit mentions were found at all as of the discoveryDate below). Where the exact publish date wasn't visible in search results, dateConfidence is 'discovered' and publishedDate is null — the post is placed on the timeline by discoveryDate instead of a guessed date.",
-  "discoveryDate": "2026-09-01",
+  "_notice": "REAL, THIRD-PARTY-ONLY posts, discovered via public web search (no authenticated social API is connected — see README > Connecting Live Data). Mintoak's own official channels (its website, and its own LinkedIn/X/Instagram/Facebook/YouTube posts) are deliberately excluded — the team already knows what it publishes itself; this feed is for outside listening. Dates are the post's actual publish date where a search result stated it directly (dateConfidence: \"exact\"), or a well-reasoned estimate anchored to the news event the post is visibly reacting to when the platform's own timestamp wasn't visible in search results (dateConfidence: \"estimated\", shown in the UI with a \"~\"). Neither is a crawl/discovery date. Engagement metrics (likes/comments/shares) are not visible in search results either, so metricsAvailable is false rather than a guessed number. No Reddit mentions of Mintoak were found at all.",
   "posts": [
-    {
-      "id": "s-li-visionaries",
-      "platform": "LinkedIn",
-      "authorName": "Mintoak",
-      "authorHandle": "mintoak-innovations-private-limited",
-      "authorTier": "Owned Channel",
-      "verified": true,
-      "postText": "Meet the visionaries behind Mintoak! — a spotlight on the founding team, including CEO Raman Khanduja.",
-      "url": "https://www.linkedin.com/posts/mintoak-innovations-private-limited_pioneers-behind-mintoak-raman-khanduja-activity-7271863739283365889-yWBs",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
-      "metricsAvailable": false
-    },
-    {
-      "id": "s-li-dobigpodcast-flop",
-      "platform": "LinkedIn",
-      "authorName": "Mintoak",
-      "authorHandle": "mintoak-innovations-private-limited",
-      "authorTier": "Owned Channel",
-      "verified": true,
-      "postText": "How Mintoak Co-founder Raman Khanduja turned a flop into a fintech platform — clip from the DoBigPodcast interview.",
-      "url": "https://www.linkedin.com/posts/mintoak-innovations-private-limited_dobigpodcast-mintoak-merchantpayments-activity-7376555389573578754-VdXQ",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
-      "metricsAvailable": false
-    },
-    {
-      "id": "s-li-founderspov",
-      "platform": "LinkedIn",
-      "authorName": "Mintoak",
-      "authorHandle": "mintoak-innovations-private-limited",
-      "authorTier": "Owned Channel",
-      "verified": true,
-      "postText": "Why Mintoak Partnered with Banks Instead of Merchants — #FoundersPOV on the company's go-to-market strategy.",
-      "url": "https://www.linkedin.com/posts/mintoak-innovations-private-limited_founderspov-startupecosystem-founderlife-activity-7482781076525084672-Y3R8",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
-      "metricsAvailable": false
-    },
-    {
-      "id": "s-li-pulse-series-a",
-      "platform": "LinkedIn",
-      "authorName": "Mintoak",
-      "authorHandle": "mintoak-innovations-private-limited",
-      "authorTier": "Owned Channel",
-      "verified": true,
-      "postText": "Mintoak Raises $20 Million Series A Funding Round Led by PayPal Ventures — LinkedIn Pulse article.",
-      "url": "https://www.linkedin.com/pulse/mintoak-raises-20-million-series-funding",
-      "publishedDate": "2023-02-14",
-      "dateConfidence": "exact",
-      "metricsAvailable": false
-    },
-    {
-      "id": "s-x-official-account",
-      "platform": "X",
-      "authorName": "Mintoak",
-      "authorHandle": "@MintoakIndia",
-      "authorTier": "Owned Channel",
-      "verified": false,
-      "postText": "Official Mintoak account on X (joined March 2021). No individual public posts surfaced via web search — X limits search-engine indexing of individual posts, so this reflects the profile only.",
-      "url": "https://x.com/mintoakindia",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
-      "metricsAvailable": false,
-      "profileFollowers": 63
-    },
     {
       "id": "s-yt-episode-295",
       "platform": "YouTube",
@@ -82,19 +15,6 @@
       "metricsAvailable": false
     },
     {
-      "id": "s-yt-empowering-smes",
-      "platform": "YouTube",
-      "authorName": "Mintoak",
-      "authorHandle": "@mintoak4643",
-      "authorTier": "Owned Channel",
-      "verified": true,
-      "postText": "Empowering SMEs: The Journey of Mintoak & the Future of Financial Services.",
-      "url": "https://www.youtube.com/watch?v=ypW2qIae1WQ",
-      "publishedDate": "2023-05-25",
-      "dateConfidence": "exact",
-      "metricsAvailable": false
-    },
-    {
       "id": "s-yt-pioneers-founderthesis",
       "platform": "YouTube",
       "authorName": "Founder Thesis (podcast)",
@@ -103,47 +23,8 @@
       "verified": false,
       "postText": "Pioneers Behind Mintoak | Raman Khanduja | Rama Tadepalli | Sanjay Nazareth | Founder Thesis — third-party podcast interview with all three co-founders.",
       "url": "https://www.youtube.com/watch?v=G6be7-507e4",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
-      "metricsAvailable": false
-    },
-    {
-      "id": "s-ig-digiledge",
-      "platform": "Instagram",
-      "authorName": "Mintoak Innovations Pvt Ltd",
-      "authorHandle": "@mintoakindia",
-      "authorTier": "Owned Channel",
-      "verified": true,
-      "postText": "Mintoak Acquires Digiledge to Enhance Merchant Payments with Bill Payments and CBDC — company announcement post.",
-      "url": "https://www.instagram.com/p/DGxltCRTiCN/?hl=en",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
-      "metricsAvailable": false
-    },
-    {
-      "id": "s-ig-ceo-feature",
-      "platform": "Instagram",
-      "authorName": "Mintoak Innovations Pvt Ltd",
-      "authorHandle": "@mintoakindia",
-      "authorTier": "Owned Channel",
-      "verified": true,
-      "postText": "Meet Raman Khanduja, Co-Founder and CEO of Mintoak — leadership spotlight post.",
-      "url": "https://www.instagram.com/p/C6A38zxtP_s/",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
-      "metricsAvailable": false
-    },
-    {
-      "id": "s-ig-new-website",
-      "platform": "Instagram",
-      "authorName": "Mintoak Innovations Pvt Ltd",
-      "authorHandle": "@mintoakindia",
-      "authorTier": "Owned Channel",
-      "verified": true,
-      "postText": "The new Mintoak website is live — announcement reel.",
-      "url": "https://www.instagram.com/reel/DKcOMedTtlM/",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
+      "publishedDate": "2024-06-04",
+      "dateConfidence": "exact",
       "metricsAvailable": false
     },
     {
@@ -153,10 +34,10 @@
       "authorHandle": "MintOak CEO on Digital Payments",
       "authorTier": "General",
       "verified": false,
-      "postText": "MintOak CEO Raman Khanduja on How Digital Payments Are Empowering SMEs in India — third-party interview video.",
+      "postText": "MintOak CEO Raman Khanduja on How Digital Payments Are Empowering SMEs in India — third-party interview video (same date as the Analytics Insight podcast episode, likely the same interview).",
       "url": "https://www.youtube.com/watch?v=qtXNe7I0C8s",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
+      "publishedDate": "2025-09-05",
+      "dateConfidence": "exact",
       "metricsAvailable": false
     },
     {
@@ -166,23 +47,10 @@
       "authorHandle": "venturedesk",
       "authorTier": "Industry Leader",
       "verified": false,
-      "postText": "Mintoak Acquires ICC Loyalty for Rs 80 Crore — third-party deal-tracking post naming a specific acquisition value not stated in Mintoak's own press materials.",
+      "postText": "Mintoak Acquires ICC Loyalty for Rs 80 Crore — third-party deal-tracking post naming a specific acquisition value not stated in Mintoak's own press materials. Hashtagged #Mintoak #BlackSoil, tying it to the BlackSoil debt-financing story.",
       "url": "https://www.linkedin.com/posts/venturedesk_venturedesk-mintoak-blacksoil-activity-7434476581030490112-W3Ot",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
-      "metricsAvailable": false
-    },
-    {
-      "id": "s-li-mintoak-digiledge-own",
-      "platform": "LinkedIn",
-      "authorName": "Mintoak",
-      "authorHandle": "mintoak-innovations-private-limited",
-      "authorTier": "Owned Channel",
-      "verified": true,
-      "postText": "Mintoak Acquires Digiledge to Expand Bill Payments and CBDC capabilities — company announcement post.",
-      "url": "https://www.linkedin.com/posts/mintoak-innovations-private-limited_mintoak-digiledge-fintech-activity-7302608008277065728-QMbA",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
+      "publishedDate": "2026-08-08",
+      "dateConfidence": "estimated",
       "metricsAvailable": false
     },
     {
@@ -194,8 +62,8 @@
       "verified": false,
       "postText": "Mintoak acquires Digiledge to enhance digital payments — third-party startup-news page post.",
       "url": "https://www.linkedin.com/posts/startupro-in_fintech-saas-platform-mintoak-has-acquired-activity-7302534507285397504-qaR-",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
+      "publishedDate": "2025-03-04",
+      "dateConfidence": "estimated",
       "metricsAvailable": false
     },
     {
@@ -207,8 +75,8 @@
       "verified": false,
       "postText": "\"So Mintoak just acquired Digiledge. This is why...\" — personal post from Marlyn Jose, one of Mintoak's Africa-expansion leadership hires, on the Digiledge acquisition.",
       "url": "https://www.linkedin.com/posts/marlyn-jose-64619911_so-mintoak-just-acquired-digiledge-this-activity-7303410192006758401-t1ZX",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
+      "publishedDate": "2025-03-04",
+      "dateConfidence": "estimated",
       "metricsAvailable": false
     },
     {
@@ -220,21 +88,8 @@
       "verified": false,
       "postText": "Mintoak Acquires Digiledge for CBDC and Bill Payments — third-party creator post covering the acquisition.",
       "url": "https://www.linkedin.com/posts/rroshandotcom_malayalistartup-digitalcurrency-acquisitions-activity-7302983459541602305-xs30",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
-      "metricsAvailable": false
-    },
-    {
-      "id": "s-fb-official",
-      "platform": "Facebook",
-      "authorName": "Mintoak",
-      "authorHandle": "MintoakIndia",
-      "authorTier": "Owned Channel",
-      "verified": true,
-      "postText": "Mintoak's official Facebook page (Mumbai) — company profile and updates.",
-      "url": "https://www.facebook.com/MintoakIndia",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
+      "publishedDate": "2025-03-04",
+      "dateConfidence": "estimated",
       "metricsAvailable": false
     },
     {
@@ -246,8 +101,8 @@
       "verified": false,
       "postText": "\"Merchant SaaS platform Mintoak is set to raise Rs 80 crore in debt from BlackSoil\" — third-party business-media Facebook post.",
       "url": "https://www.facebook.com/theceo.in/posts/merchant-saas-platform-mintoak-is-set-to-raise-rs-80-crore-in-debt-from-blacksoi/1373798434775710/",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
+      "publishedDate": "2026-08-08",
+      "dateConfidence": "estimated",
       "metricsAvailable": false
     },
     {
@@ -259,8 +114,8 @@
       "verified": true,
       "postText": "\"Mumbai-based fintech Mintoak has acquired Dubai-headquartered ICC Loyalty, adding loyalty and rewards technology to its banking platform...\" — YourStory's own Facebook post sharing its ICC Loyalty coverage.",
       "url": "https://www.facebook.com/yourstorycom/posts/mumbai-based-fintech-mintoak-has-acquired-dubai-headquartered-icc-loyalty-adding/1538399168322052/",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
+      "publishedDate": "2026-08-04",
+      "dateConfidence": "estimated",
       "metricsAvailable": false
     },
     {
@@ -272,8 +127,8 @@
       "verified": false,
       "postText": "\"Mintoak Raises $6M in Series A Funding from PayPal...\" — third-party business-media LinkedIn post on the Series A extension.",
       "url": "https://www.linkedin.com/posts/the-ceo-magazine---india_mintoak-fintechindia-seriesafunding-activity-7410612940741083137-Dhet",
-      "publishedDate": null,
-      "dateConfidence": "discovered",
+      "publishedDate": "2025-12-26",
+      "dateConfidence": "estimated",
       "metricsAvailable": false
     }
   ]
