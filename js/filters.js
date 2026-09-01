@@ -86,6 +86,10 @@ function getRangeBounds(rangeKey, customStart, customEnd, referenceDate) {
   end.setHours(23, 59, 59, 999);
 
   switch (rangeKey) {
+    case "lifetime":
+      start = new Date(2000, 0, 1);
+      end = new Date(2100, 0, 1);
+      break;
     case "today":
       start = new Date(today);
       break;

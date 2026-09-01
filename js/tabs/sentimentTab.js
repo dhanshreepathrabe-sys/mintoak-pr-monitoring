@@ -1,18 +1,11 @@
 const REACH_ALERT_THRESHOLD = 20000;
 
 function buildSentimentTrendSeries(mentions, start, end) {
-  const days = [];
-  const cursor = new Date(start);
-  while (cursor <= end) {
-    days.push(new Date(cursor));
-    cursor.setDate(cursor.getDate() + 1);
-  }
-  return days.map((d) => {
-    const key = d.toISOString().slice(0, 10);
-    const dayMentions = mentions.filter((m) => m.publishedDate === key);
+  const buckets = computeTimeBuckets(mentions, start, end, (m) => m.publishedDate);
+  return buckets.map((b) => {
     const counts = { Positive: 0, Neutral: 0, Negative: 0 };
-    dayMentions.forEach((m) => { counts[m.sentiment] += 1; });
-    return { date: d.toLocaleDateString(undefined, { month: "short", day: "numeric" }), ...counts };
+    b.items.forEach((m) => { counts[m.sentiment] += 1; });
+    return { date: b.label, ...counts };
   });
 }
 

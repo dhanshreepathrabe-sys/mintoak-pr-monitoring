@@ -5,17 +5,8 @@ function computeNetSentimentScore(counts) {
 }
 
 function buildDailySeries(mentions, start, end) {
-  const days = [];
-  const cursor = new Date(start);
-  while (cursor <= end) {
-    days.push(new Date(cursor));
-    cursor.setDate(cursor.getDate() + 1);
-  }
-  return days.map((d) => {
-    const key = d.toISOString().slice(0, 10);
-    const count = mentions.filter((m) => m.publishedDate === key).length;
-    return { date: d.toLocaleDateString(undefined, { month: "short", day: "numeric" }), count };
-  });
+  const buckets = computeTimeBuckets(mentions, start, end, (m) => m.publishedDate);
+  return buckets.map((b) => ({ date: b.label, count: b.items.length }));
 }
 
 function buildPlatformVolume(mentions, socialPosts) {

@@ -1,5 +1,5 @@
 const appState = {
-  rangeKey: "30d",
+  rangeKey: "lifetime",
   customStart: null,
   customEnd: null,
   activeTab: "overview",
@@ -9,6 +9,7 @@ const appState = {
 };
 
 const RANGE_LABELS = {
+  lifetime: "All Time",
   today: "Today",
   "7d": "Last 7 Days",
   "30d": "Last 30 Days",

@@ -123,3 +123,86 @@ function extractTopKeywords(mentions, limit = 14) {
     .slice(0, limit)
     .map(([word, count]) => ({ word, count }));
 }
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+const MAX_BUCKETS = 120;
+
+/**
+ * Buckets a date range for timeline charts. Never iterates day-by-day over
+ * a wide span (the "All Time" default range is a fixed 2000-2100 window,
+ * so a naive daily loop would run ~36,500 times) — instead it clamps to
+ * the actual min/max date found in `items` (when any exist) and picks a
+ * bucket size (day/week/month) so the bucket count stays bounded and the
+ * chart stays readable, however wide the nominal range is.
+ */
+function computeTimeBuckets(items, start, end, getDateFn) {
+  let effectiveStart = start;
+  let effectiveEnd = end;
+
+  if (items.length) {
+    const times = items.map((i) => new Date(getDateFn(i)).getTime()).filter((t) => !Number.isNaN(t));
+    if (times.length) {
+      const minDate = new Date(Math.min(...times));
+      const maxDate = new Date(Math.max(...times));
+      effectiveStart = minDate < start ? start : minDate;
+      effectiveEnd = maxDate > end ? end : maxDate;
+      if (effectiveStart > effectiveEnd) effectiveStart = effectiveEnd;
+    }
+  } else {
+    // No data at all: still bound the span so an accidental huge nominal
+    // range (e.g. "All Time" with an empty dataset) can't blow up the loop.
+    const spanDays = (end - start) / DAY_MS;
+    if (spanDays > 366) {
+      effectiveStart = new Date(end);
+      effectiveStart.setDate(effectiveStart.getDate() - 29);
+    }
+  }
+
+  const spanDays = Math.max(1, (effectiveEnd - effectiveStart) / DAY_MS);
+  const granularity = spanDays <= 62 ? "day" : spanDays <= 730 ? "week" : "month";
+
+  const keyOf = (d) => {
+    if (granularity === "month") return d.toISOString().slice(0, 7);
+    if (granularity === "week") {
+      const monday = new Date(d);
+      const dow = (monday.getDay() + 6) % 7; // 0 = Monday
+      monday.setDate(monday.getDate() - dow);
+      return monday.toISOString().slice(0, 10);
+    }
+    return d.toISOString().slice(0, 10);
+  };
+  const labelOf = (d) =>
+    granularity === "month"
+      ? d.toLocaleDateString(undefined, { year: "2-digit", month: "short" })
+      : d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+  const advance = (d) => {
+    const next = new Date(d);
+    if (granularity === "month") next.setMonth(next.getMonth() + 1);
+    else if (granularity === "week") next.setDate(next.getDate() + 7);
+    else next.setDate(next.getDate() + 1);
+    return next;
+  };
+
+  const buckets = [];
+  let cursor = new Date(effectiveStart);
+  let guard = 0;
+  while (cursor <= effectiveEnd && guard < MAX_BUCKETS) {
+    buckets.push({ key: keyOf(cursor), label: labelOf(cursor), date: new Date(cursor), items: [] });
+    cursor = advance(cursor);
+    guard += 1;
+  }
+  if (buckets.length === 0) {
+    buckets.push({ key: keyOf(effectiveStart), label: labelOf(effectiveStart), date: new Date(effectiveStart), items: [] });
+  }
+
+  const byKey = new Map(buckets.map((b) => [b.key, b]));
+  items.forEach((item) => {
+    const d = new Date(getDateFn(item));
+    if (Number.isNaN(d.getTime())) return;
+    const k = keyOf(d);
+    const bucket = byKey.get(k);
+    if (bucket) bucket.items.push(item);
+  });
+
+  return buckets;
+}
