@@ -38,7 +38,7 @@ const TRUSTED_DOMAINS = new Set([
   "startupnews.fyi", "startupstorymedia.com", "indianstartuptimes.com",
   "gccbusinessnews.com", "outlookbusiness.com", "aninews.in", "latestly.com",
   "in.investing.com", "investing.com", "siasat.com", "indianewengland.com",
-  "paypal-corp.com", "businesstoday.in"
+  "paypal-corp.com", "businesstoday.in", "fiinews.com", "techtrendske.co.ke", "indiasnews.net"
 ]);
 
 function scrubUrl(rawUrl) {

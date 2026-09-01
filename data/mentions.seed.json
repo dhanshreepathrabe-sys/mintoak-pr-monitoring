@@ -694,5 +694,41 @@
     "publishedDate": "2022-12-14",
     "domain": "businesstoday.in",
     "topic": "Bank / Network Partnership"
+  },
+  {
+    "id": "m-2026-08-04-icc-fiinews",
+    "source": "FII News",
+    "sourceType": "News",
+    "author": "FII News Desk",
+    "headline": "Market: Mintoak acquires Dubai's ICC Loyalty",
+    "snippet": "Market-desk coverage of Mintoak's acquisition of Dubai-based ICC Loyalty.",
+    "url": "https://www.fiinews.com/2026/08/04/market-mintoak-acquires-dubais-icc-loyalty/",
+    "publishedDate": "2026-08-04",
+    "domain": "fiinews.com",
+    "topic": "M&A / Acquisition"
+  },
+  {
+    "id": "m-2026-08-04-icc-techtrendske",
+    "source": "TechTrends Kenya",
+    "sourceType": "News",
+    "author": "TechTrends Kenya Desk",
+    "headline": "Mintoak acquires ICC Loyalty to grow customer engagement",
+    "snippet": "Kenyan tech-press coverage of the ICC Loyalty acquisition and its relevance to African banking partners.",
+    "url": "https://techtrendske.co.ke/2026/08/04/mintoak-acquires-icc-loyalty/",
+    "publishedDate": "2026-08-04",
+    "domain": "techtrendske.co.ke",
+    "topic": "M&A / Acquisition"
+  },
+  {
+    "id": "m-2026-08-04-icc-indiasnews",
+    "source": "India's News.Net",
+    "sourceType": "News",
+    "author": "India's News.Net Desk",
+    "headline": "Mintoak acquires Middle East-headquartered fintech ICC Loyalty",
+    "snippet": "Wire-syndicated coverage of the ICC Loyalty acquisition.",
+    "url": "https://www.indiasnews.net/news/279221724/mintoak-acquires-middle-east-headquartered-fintech-icc-loyalty",
+    "publishedDate": "2026-08-04",
+    "domain": "indiasnews.net",
+    "topic": "M&A / Acquisition"
   }
 ]
