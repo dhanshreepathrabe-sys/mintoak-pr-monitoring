@@ -188,6 +188,31 @@ vendor/                      Locally vendored Chart.js 4.5.1 + jsPDF 4.2.1 (no C
 
 ## Automated daily refresh
 
-A scheduled Routine re-crawls the web daily, updates both seed datasets,
-commits, and republishes the standalone Artifact automatically — see
-**Automated refresh** below for the schedule and exactly what each run does.
+A Routine (`trig_0189LdJZeUhHvTJPmnNzo8Ao`, cron `0 6 * * *`, ~06:00 UTC
+daily) fires a fresh, standalone session each day that:
+
+1. Reads the current `data/mentions.seed.json` and `data/social.seed.json`
+   to know what already exists (dedupes new finds against these by URL).
+2. Runs the same web-search queries described in **Data honesty** above,
+   looking for press coverage from roughly the last few days and new
+   public social posts, applying the same disambiguation/honesty rules
+   (real URLs only, no fabricated dates or engagement metrics, cap of ~8
+   new mentions per run).
+3. If anything genuinely new was found: runs `npm run build:artifact`,
+   sanity-checks the rebuilt file, commits, pushes to
+   `claude/mintoak-pr-dashboard-6mod92`, and republishes the same
+   Artifact (`https://claude.ai/code/artifact/aa027e8f-0439-4fce-ba91-2835bbacfdf8`).
+   If nothing new was found, it does nothing — no empty commits.
+
+**Known caveat, not yet verified:** the fired session's tool grant (echoed
+back when the trigger was created) listed Bash/git/WebSearch/file tools
+but not the `Artifact` tool explicitly. It may still work if the
+environment runs Routine sessions in a permissive mode, but this hasn't
+been confirmed against a real firing yet — check that the Artifact link
+actually updated after the first run, and if it didn't, the repo commits
+(steps 1–3 above) are the fallback signal that the crawl itself is
+working even if the last step silently failed.
+
+Manage the Routine like any other: `list_triggers` to check its last-run
+status, `update_trigger` to change the schedule or pause it, `fire_trigger`
+to run it on demand instead of waiting for the next scheduled time.
