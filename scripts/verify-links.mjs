@@ -33,7 +33,9 @@ const TRUSTED_DOMAINS = new Set([
   "timesofindia.indiatimes.com", "aol.com", "aap.com.au",
   "prnewswire.co.uk", "en.prnasia.com", "fintechfutures.com",
   "electronicpaymentsinternational.com", "entrepreneur.com", "adgully.com",
-  "axis.bank.in", "cbinsights.com", "tracxn.com"
+  "axis.bank.in", "cbinsights.com", "tracxn.com", "ibsintelligence.com",
+  "mediabrief.com", "analyticsinsight.net", "tribuneindia.com",
+  "indianstartupnews.com", "siliconindia.com", "eletsonline.com"
 ]);
 
 async function checkUrl(url) {

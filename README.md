@@ -29,17 +29,20 @@ egress** (outbound HTTP to arbitrary domains — news sites, social APIs — is
 blocked by network policy; only package registries and Anthropic's own
 search tool are reachable). That shaped two decisions:
 
-1. **`data/mentions.seed.json`** — 23 real Mintoak media mentions, sourced
-   via web search (Business Standard, Inc42, PR Newswire, The Paypers,
-   TradingView, Manila Times, CXOToday, FinTech Magazine, FinTech Futures,
-   YourStory, Entrepreneur India, Adgully, IndiaInfoline, AOL, and Axis
-   Bank's own newsroom), covering the ICC Loyalty acquisition, the Digiledge
-   (CBDC/bill-payments) acquisition, the Visa partnership, the Axis Bank
-   "neo for merchants" launch, the Axis Bank partnership announcement, the
-   Jan-2025 Z3Partners secondary round, the 2023 PayPal Ventures round, and
-   the HDFC Bank stake. URLs are real and were returned by web search, but
-   this sandbox
-   could not perform the live HTTP status check itself (see **Link
+1. **`data/mentions.seed.json`** — 34 real Mintoak media mentions (26
+   distinct stories after dedup), sourced via web search across Business
+   Standard, Inc42, PR Newswire (US/UK), The Paypers, TradingView, Manila
+   Times, CXOToday, FinTech Magazine, FinTech Futures, YourStory,
+   Entrepreneur India, Adgully, IndiaInfoline, AOL, IBS Intelligence,
+   Mediabrief, Analytics Insight, The Tribune, Indian Startup News,
+   SiliconIndia, Elets BFSI, and Axis Bank's own newsroom. Covers the ICC
+   Loyalty acquisition, the Digiledge (CBDC/bill-payments) acquisition, the
+   Visa partnership, the Axis Bank "neo for merchants" launch and
+   partnership announcement, the May-2024 SEA/MENA leadership expansion,
+   the Jan-2025 Z3Partners secondary round, the 2023 PayPal Ventures round,
+   the HDFC Bank stake, and several leadership profiles/interviews of CEO
+   Raman Khanduja. URLs are real and were returned by web search, but this
+   sandbox could not perform the live HTTP status check itself (see **Link
    verification** below) — run `npm run verify:links` from a machine with
    normal internet access before trusting the "Link status" badge in
    production.
@@ -47,29 +50,41 @@ search tool are reachable). That shaped two decisions:
    platform API** (checked: none of the connected marketing tools —
    Supermetrics, Windsor.ai, Porter Metrics — have a real Mintoak social
    account authorized), so instead of fabricating engagement metrics, these
-   are **real posts found via public web search** (`site:linkedin.com`,
-   `site:youtube.com`, etc.), each with `metricsAvailable: false` — the UI
-   shows "Engagement data unavailable" rather than a made-up like/comment
-   count. Two more honest gaps: most results are Mintoak's own official
-   posts, since public search indexes very little third-party chatter about
-   a B2B merchant-payments platform (no Reddit mentions were found at all);
-   and where the exact publish date wasn't visible in search results,
-   `dateConfidence: "discovered"` and the post is placed on the timeline by
-   the date this crawl found it (`discoveryDate`), not a guessed publish
-   date. A `WEB SEARCH` badge in the UI marks every record accordingly.
+   are **17 real posts found via public web search** (`site:linkedin.com`,
+   `site:youtube.com`, etc.) across LinkedIn, X, YouTube, Instagram — each
+   with `metricsAvailable: false`, so the UI shows "Engagement data
+   unavailable" rather than a made-up like/comment count. Most are
+   Mintoak's own official posts (`authorTier: "Owned Channel"`), but a
+   second search pass specifically for third-party chatter (`VentureDesk`,
+   `StartupRo`, individual creators, Mintoak's own newly-hired regional
+   leads posting personally) surfaced several genuine outside voices too —
+   still thin, because public search indexes very little third-party
+   chatter about a B2B merchant-payments platform, and no Reddit mentions
+   were found at all. Where the exact publish date wasn't visible in
+   search results, `dateConfidence: "discovered"` and the post is placed on
+   the timeline by the date this crawl found it (`discoveryDate`), not a
+   guessed publish date. A `WEB SEARCH` badge in the UI marks every record
+   accordingly.
 
 ## Strict context-disambiguation filter
 
 `js/filters.js` → `classifyMintoakRelevance()` is what the "Live Mentions"
-spec calls the disambiguation filter. It requires:
+spec calls the disambiguation filter. It treats the two spellings
+differently, because they carry different amounts of ambiguity:
 
-- the text contains "Mintoak" / "Mint Oak" as an entity, **and**
-- it does **not** match an exclude-list (botanical mint/oak references,
-  real-estate "Mint Oak" projects, generic gardening/furniture content),
-  **and**
-- it matches at least one fintech/merchant/banking context keyword
-  (`fintech`, `merchant`, `payments`, `SME`, `bank`, `SaaS`, `QR`, `UPI`,
-  the named bank/partner entities, etc.)
+- **"Mintoak" (one word)** is unambiguous — nobody writes the plant/tree/
+  real-estate sense that way — so it's accepted on its own, minus the
+  exclude-list check. (An earlier version required a fintech-keyword match
+  even here, which silently dropped real, on-topic coverage whose text
+  just didn't happen to contain one of the listed words — e.g. a pure
+  leadership-hire story. Fixed by only requiring the keyword gate for the
+  genuinely ambiguous case below.)
+- **"Mint Oak" (spaced)** is genuinely ambiguous — could be the company
+  written with a space, or the plant/tree/real-estate sense — so it's only
+  accepted when it also matches an exclude-list miss **and** at least one
+  fintech/merchant/banking context keyword (`fintech`, `merchant`,
+  `payments`, `SME`, `bank`, `SaaS`, `QR`, `UPI`, the named bank/partner
+  entities, etc.).
 
 Every mention in `getAllMentions()` is run through this before it reaches
 the UI. Extend `MINTOAK_CONTEXT_KEYWORDS` / `MINTOAK_EXCLUDE_KEYWORDS` in

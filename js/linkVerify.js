@@ -31,7 +31,9 @@ const TRUSTED_DOMAINS = new Set([
   "twitter.com", "x.com", "youtube.com", "reddit.com", "instagram.com",
   "prnewswire.co.uk", "en.prnasia.com", "fintechfutures.com",
   "electronicpaymentsinternational.com", "entrepreneur.com", "adgully.com",
-  "axis.bank.in", "cbinsights.com", "tracxn.com"
+  "axis.bank.in", "cbinsights.com", "tracxn.com", "ibsintelligence.com",
+  "mediabrief.com", "analyticsinsight.net", "tribuneindia.com",
+  "indianstartupnews.com", "siliconindia.com", "eletsonline.com"
 ]);
 
 function scrubUrl(rawUrl) {

@@ -22,9 +22,14 @@ function normalize(text) {
   return (text || "").toLowerCase();
 }
 
-function mentionsMintoakEntity(text) {
-  const t = normalize(text);
-  return t.includes("mintoak") || t.includes("mint oak innovations") || /\bmint\s?oak\b/i.test(text || "");
+/** "mintoak" (one word, however capitalized) unambiguously names the company — nobody writes the plant/tree/real-estate sense that way. */
+function mentionsUnambiguousMintoak(text) {
+  return /\bmintoak\b/i.test(text || "");
+}
+
+/** "mint oak" (two words) is genuinely ambiguous — could be the company written with a space, or the plant/tree/real-estate sense. */
+function mentionsAmbiguousMintOak(text) {
+  return /\bmint\s+oak\b/i.test(text || "");
 }
 
 /**
@@ -35,7 +40,9 @@ function mentionsMintoakEntity(text) {
 function classifyMintoakRelevance(item) {
   const haystack = normalize(`${item.headline} ${item.snippet} ${item.topic || ""} ${item.source || ""}`);
 
-  if (!mentionsMintoakEntity(haystack)) {
+  const unambiguous = mentionsUnambiguousMintoak(haystack);
+  const ambiguous = !unambiguous && mentionsAmbiguousMintOak(haystack);
+  if (!unambiguous && !ambiguous) {
     return { relevant: false, reason: "Does not reference Mintoak / Mintoak Innovations." };
   }
 
@@ -44,12 +51,21 @@ function classifyMintoakRelevance(item) {
     return { relevant: false, reason: "Matches an excluded (botanical / unrelated) context." };
   }
 
-  const hasContext = MINTOAK_CONTEXT_KEYWORDS.some((kw) => haystack.includes(kw));
-  if (!hasContext) {
-    return { relevant: false, reason: "No fintech / merchant-payments / banking context found alongside the name." };
+  // "Mintoak" written as one word is unambiguous on its own — real company
+  // news doesn't always happen to use one of the fintech keywords below
+  // (e.g. a pure leadership-hire story). Only the genuinely ambiguous
+  // spaced "mint oak" needs a fintech/business context word to confirm
+  // it's this company and not the plant/tree/real-estate sense.
+  if (unambiguous) {
+    return { relevant: true, reason: "Unambiguous \"Mintoak\" entity match." };
   }
 
-  return { relevant: true, reason: "Fintech / merchant-payments context confirmed." };
+  const hasContext = MINTOAK_CONTEXT_KEYWORDS.some((kw) => haystack.includes(kw));
+  if (!hasContext) {
+    return { relevant: false, reason: "\"Mint oak\" is ambiguous and no fintech / merchant-payments / banking context was found alongside it." };
+  }
+
+  return { relevant: true, reason: "Ambiguous \"mint oak\" confirmed as the company by fintech/business context." };
 }
 
 function filterRelevantMentions(items) {

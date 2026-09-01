@@ -145,6 +145,84 @@
       "publishedDate": null,
       "dateConfidence": "discovered",
       "metricsAvailable": false
+    },
+    {
+      "id": "s-yt-ceo-digital-payments",
+      "platform": "YouTube",
+      "authorName": "Third-party interview channel",
+      "authorHandle": "MintOak CEO on Digital Payments",
+      "authorTier": "General",
+      "verified": false,
+      "postText": "MintOak CEO Raman Khanduja on How Digital Payments Are Empowering SMEs in India — third-party interview video.",
+      "url": "https://www.youtube.com/watch?v=qtXNe7I0C8s",
+      "publishedDate": null,
+      "dateConfidence": "discovered",
+      "metricsAvailable": false
+    },
+    {
+      "id": "s-li-venturedesk-icc",
+      "platform": "LinkedIn",
+      "authorName": "VentureDesk",
+      "authorHandle": "venturedesk",
+      "authorTier": "Industry Leader",
+      "verified": false,
+      "postText": "Mintoak Acquires ICC Loyalty for Rs 80 Crore — third-party deal-tracking post naming a specific acquisition value not stated in Mintoak's own press materials.",
+      "url": "https://www.linkedin.com/posts/venturedesk_venturedesk-mintoak-blacksoil-activity-7434476581030490112-W3Ot",
+      "publishedDate": null,
+      "dateConfidence": "discovered",
+      "metricsAvailable": false
+    },
+    {
+      "id": "s-li-mintoak-digiledge-own",
+      "platform": "LinkedIn",
+      "authorName": "Mintoak",
+      "authorHandle": "mintoak-innovations-private-limited",
+      "authorTier": "Owned Channel",
+      "verified": true,
+      "postText": "Mintoak Acquires Digiledge to Expand Bill Payments and CBDC capabilities — company announcement post.",
+      "url": "https://www.linkedin.com/posts/mintoak-innovations-private-limited_mintoak-digiledge-fintech-activity-7302608008277065728-QMbA",
+      "publishedDate": null,
+      "dateConfidence": "discovered",
+      "metricsAvailable": false
+    },
+    {
+      "id": "s-li-startupro-digiledge",
+      "platform": "LinkedIn",
+      "authorName": "StartupRo",
+      "authorHandle": "startupro-in",
+      "authorTier": "General",
+      "verified": false,
+      "postText": "Mintoak acquires Digiledge to enhance digital payments — third-party startup-news page post.",
+      "url": "https://www.linkedin.com/posts/startupro-in_fintech-saas-platform-mintoak-has-acquired-activity-7302534507285397504-qaR-",
+      "publishedDate": null,
+      "dateConfidence": "discovered",
+      "metricsAvailable": false
+    },
+    {
+      "id": "s-li-marlynjose-digiledge",
+      "platform": "LinkedIn",
+      "authorName": "Marlyn Jose",
+      "authorHandle": "marlyn-jose-64619911",
+      "authorTier": "General",
+      "verified": false,
+      "postText": "\"So Mintoak just acquired Digiledge. This is why...\" — personal post from Marlyn Jose, one of Mintoak's Africa-expansion leadership hires, on the Digiledge acquisition.",
+      "url": "https://www.linkedin.com/posts/marlyn-jose-64619911_so-mintoak-just-acquired-digiledge-this-activity-7303410192006758401-t1ZX",
+      "publishedDate": null,
+      "dateConfidence": "discovered",
+      "metricsAvailable": false
+    },
+    {
+      "id": "s-li-rroshan-digiledge",
+      "platform": "LinkedIn",
+      "authorName": "R Roshan",
+      "authorHandle": "rroshandotcom",
+      "authorTier": "General",
+      "verified": false,
+      "postText": "Mintoak Acquires Digiledge for CBDC and Bill Payments — third-party creator post covering the acquisition.",
+      "url": "https://www.linkedin.com/posts/rroshandotcom_malayalistartup-digitalcurrency-acquisitions-activity-7302983459541602305-xs30",
+      "publishedDate": null,
+      "dateConfidence": "discovered",
+      "metricsAvailable": false
     }
   ]
 }
