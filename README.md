@@ -16,11 +16,12 @@ npm run start   # rebuilds the data bundle and serves the app at http://localhos
 |---|---|
 | **Overview** | Total Mentions, Share of Voice, Net Sentiment Score, Reach/Impressions; mentions-over-time line chart; mention volume by platform; top trending keywords; an auto-generated, topic-grouped summary feed. |
 | **Live Mentions** | Every news/press/blog mention, with source, author, headline, snippet, date, reach, and sentiment tag. Search, source-type filter, and sort by newest/reach. |
-| **Social Listings** | Cross-platform social post feed (X, LinkedIn, YouTube, Reddit, Instagram) with engagement metrics and influencer-tier filtering. Currently **sample data only** — see below. |
+| **Social Listings** | Cross-platform social post feed (X, LinkedIn, YouTube, Reddit, Instagram, Facebook) with author-tier filtering. Real posts found via web search — see **Data honesty** below for what that does and doesn't get you. |
 | **Sentiment Analysis** | Sentiment distribution donut, sentiment trend line, aspect-based breakdown (Product, Customer Service, Leadership, Bank Integrations), and a Risk & Alerts panel for high-reach negative mentions. |
 
-A global date-range filter (Today / Last 7 Days / Last 30 Days / YTD / Custom)
-drives every metric, chart, and feed across all four tabs.
+A global date-range filter drives every metric, chart, and feed across all
+four tabs. It defaults to **All Time** (everything in the dataset), with
+Today / Last 7 Days / Last 30 Days / YTD / Custom available to narrow down.
 
 ## Data honesty — what's real vs. sample
 
@@ -29,42 +30,64 @@ egress** (outbound HTTP to arbitrary domains — news sites, social APIs — is
 blocked by network policy; only package registries and Anthropic's own
 search tool are reachable). That shaped two decisions:
 
-1. **`data/mentions.seed.json`** — 34 real Mintoak media mentions (26
-   distinct stories after dedup), sourced via web search across Business
-   Standard, Inc42, PR Newswire (US/UK), The Paypers, TradingView, Manila
-   Times, CXOToday, FinTech Magazine, FinTech Futures, YourStory,
-   Entrepreneur India, Adgully, IndiaInfoline, AOL, IBS Intelligence,
-   Mediabrief, Analytics Insight, The Tribune, Indian Startup News,
-   SiliconIndia, Elets BFSI, and Axis Bank's own newsroom. Covers the ICC
-   Loyalty acquisition, the Digiledge (CBDC/bill-payments) acquisition, the
-   Visa partnership, the Axis Bank "neo for merchants" launch and
-   partnership announcement, the May-2024 SEA/MENA leadership expansion,
-   the Jan-2025 Z3Partners secondary round, the 2023 PayPal Ventures round,
-   the HDFC Bank stake, and several leadership profiles/interviews of CEO
-   Raman Khanduja. URLs are real and were returned by web search, but this
-   sandbox could not perform the live HTTP status check itself (see **Link
-   verification** below) — run `npm run verify:links` from a machine with
-   normal internet access before trusting the "Link status" badge in
-   production.
+1. **`data/mentions.seed.json`** — 58 real Mintoak media mentions (40
+   distinct stories after dedup), sourced via web search across roughly 40
+   outlets: Business Standard, Inc42, Entrackr, PR Newswire (US/UK), The
+   Paypers, TradingView, Manila Times, CXOToday, FinTech Magazine, FinTech
+   Futures, YourStory, Entrepreneur India, Adgully, IndiaInfoline, AOL, IBS
+   Intelligence, Mediabrief, Analytics Insight, The Tribune, Indian Startup
+   News, SiliconIndia, Elets BFSI, ANI, LatestLY, GCC Business News, Outlook
+   Business, Business Today, Siasat Daily, India New England News, Finance
+   Outlook India, Startup Story, Indian Startup Times, TheIndiaBizz,
+   Startup News FYI, Investing.com/IANS, Axis Bank's own newsroom, and
+   PayPal's own newsroom. Covers the ICC Loyalty acquisition (including
+   Entrackr's early scoop months before the official announcement, and the
+   BlackSoil debt financing behind it), the Digiledge (CBDC/bill-payments)
+   acquisition, the Visa partnership, the Axis Bank "neo for merchants"
+   launch and partnership announcement, the May-2024 SEA/MENA leadership
+   expansion, four separate funding events (the 2021 and Dec-2022 HDFC
+   stakes, the Feb-2023 $20M PayPal-led Series A, the Jan-2025 Z3Partners
+   secondary, and the Dec-2025 Series A extension at a $280M valuation),
+   and several leadership profiles/interviews of CEO Raman Khanduja. URLs
+   are real and were returned by web search, but this sandbox could not
+   perform the live HTTP status check itself (see **Link verification**
+   below) — run `npm run verify:links` from a machine with normal internet
+   access before trusting the "Link status" badge in production.
 2. **`data/social.seed.json`** — Social Listings has **no authenticated
    platform API** (checked: none of the connected marketing tools —
    Supermetrics, Windsor.ai, Porter Metrics — have a real Mintoak social
    account authorized), so instead of fabricating engagement metrics, these
-   are **17 real posts found via public web search** (`site:linkedin.com`,
-   `site:youtube.com`, etc.) across LinkedIn, X, YouTube, Instagram — each
-   with `metricsAvailable: false`, so the UI shows "Engagement data
-   unavailable" rather than a made-up like/comment count. Most are
-   Mintoak's own official posts (`authorTier: "Owned Channel"`), but a
-   second search pass specifically for third-party chatter (`VentureDesk`,
-   `StartupRo`, individual creators, Mintoak's own newly-hired regional
-   leads posting personally) surfaced several genuine outside voices too —
-   still thin, because public search indexes very little third-party
-   chatter about a B2B merchant-payments platform, and no Reddit mentions
-   were found at all. Where the exact publish date wasn't visible in
-   search results, `dateConfidence: "discovered"` and the post is placed on
-   the timeline by the date this crawl found it (`discoveryDate`), not a
-   guessed publish date. A `WEB SEARCH` badge in the UI marks every record
-   accordingly.
+   are **21 real posts found via public web search** (`site:linkedin.com`,
+   `site:youtube.com`, `site:facebook.com`, etc.) across LinkedIn, X,
+   YouTube, Instagram and Facebook — each with `metricsAvailable: false`,
+   so the UI shows "Engagement data unavailable" rather than a made-up
+   like/comment count. Most are Mintoak's own official posts
+   (`authorTier: "Owned Channel"`), but a search pass specifically for
+   third-party chatter (`VentureDesk`, `StartupRo`, `The CEO Magazine
+   India`, individual creators, Mintoak's own newly-hired regional leads
+   posting personally, YourStory's own Facebook page sharing its coverage)
+   surfaced several genuine outside voices too — still thin, because
+   public search indexes very little third-party chatter about a B2B
+   merchant-payments platform, and no Reddit mentions were found at all.
+   Where the exact publish date wasn't visible in search results,
+   `dateConfidence: "discovered"` and the post is placed on the timeline by
+   the date this crawl found it (`discoveryDate`), not a guessed publish
+   date. A `WEB SEARCH` badge in the UI marks every record accordingly.
+
+**On "1210+ social listings and 50+ mentions"**: 50+ real mentions turned
+out to be findable — the 58 raw / 40 distinct here clear it. 1210+ social
+listings did not, and realistically can't via web search: individual
+posts on X, Instagram and (mostly) LinkedIn aren't search-engine-indexed
+at the level of a specific status update — search surfaces a company's
+profile pages, its more prominent public posts, and syndicated news-media
+social shares, which is exactly what these 21 records are. A number like
+1,210 is the shape of what a real social-listening API (X API v2,
+LinkedIn, Meltwater, Brandwatch, Sprinklr, etc.) returns — it counts
+things like replies, retweets-with-comment and impressions-adjacent
+mentions that a search index was never built to surface individually.
+Wiring one of those up (see **Connecting live data** below) is the actual
+path to that number; no further web-search crawling will get there
+honestly.
 
 ## Strict context-disambiguation filter
 

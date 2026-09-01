@@ -33,7 +33,12 @@ const TRUSTED_DOMAINS = new Set([
   "electronicpaymentsinternational.com", "entrepreneur.com", "adgully.com",
   "axis.bank.in", "cbinsights.com", "tracxn.com", "ibsintelligence.com",
   "mediabrief.com", "analyticsinsight.net", "tribuneindia.com",
-  "indianstartupnews.com", "siliconindia.com", "eletsonline.com"
+  "indianstartupnews.com", "siliconindia.com", "eletsonline.com",
+  "facebook.com", "theindiabizz.com", "financeoutlookindia.com",
+  "startupnews.fyi", "startupstorymedia.com", "indianstartuptimes.com",
+  "gccbusinessnews.com", "outlookbusiness.com", "aninews.in", "latestly.com",
+  "in.investing.com", "investing.com", "siasat.com", "indianewengland.com",
+  "paypal-corp.com", "businesstoday.in"
 ]);
 
 function scrubUrl(rawUrl) {

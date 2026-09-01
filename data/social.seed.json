@@ -223,6 +223,58 @@
       "publishedDate": null,
       "dateConfidence": "discovered",
       "metricsAvailable": false
+    },
+    {
+      "id": "s-fb-official",
+      "platform": "Facebook",
+      "authorName": "Mintoak",
+      "authorHandle": "MintoakIndia",
+      "authorTier": "Owned Channel",
+      "verified": true,
+      "postText": "Mintoak's official Facebook page (Mumbai) — company profile and updates.",
+      "url": "https://www.facebook.com/MintoakIndia",
+      "publishedDate": null,
+      "dateConfidence": "discovered",
+      "metricsAvailable": false
+    },
+    {
+      "id": "s-fb-theceo-blacksoil",
+      "platform": "Facebook",
+      "authorName": "The CEO Magazine India",
+      "authorHandle": "theceo.in",
+      "authorTier": "Industry Leader",
+      "verified": false,
+      "postText": "\"Merchant SaaS platform Mintoak is set to raise Rs 80 crore in debt from BlackSoil\" — third-party business-media Facebook post.",
+      "url": "https://www.facebook.com/theceo.in/posts/merchant-saas-platform-mintoak-is-set-to-raise-rs-80-crore-in-debt-from-blacksoi/1373798434775710/",
+      "publishedDate": null,
+      "dateConfidence": "discovered",
+      "metricsAvailable": false
+    },
+    {
+      "id": "s-fb-yourstory-icc",
+      "platform": "Facebook",
+      "authorName": "YourStory",
+      "authorHandle": "yourstorycom",
+      "authorTier": "Industry Leader",
+      "verified": true,
+      "postText": "\"Mumbai-based fintech Mintoak has acquired Dubai-headquartered ICC Loyalty, adding loyalty and rewards technology to its banking platform...\" — YourStory's own Facebook post sharing its ICC Loyalty coverage.",
+      "url": "https://www.facebook.com/yourstorycom/posts/mumbai-based-fintech-mintoak-has-acquired-dubai-headquartered-icc-loyalty-adding/1538399168322052/",
+      "publishedDate": null,
+      "dateConfidence": "discovered",
+      "metricsAvailable": false
+    },
+    {
+      "id": "s-li-ceomagazine-funding",
+      "platform": "LinkedIn",
+      "authorName": "The CEO Magazine India",
+      "authorHandle": "the-ceo-magazine---india",
+      "authorTier": "Industry Leader",
+      "verified": false,
+      "postText": "\"Mintoak Raises $6M in Series A Funding from PayPal...\" — third-party business-media LinkedIn post on the Series A extension.",
+      "url": "https://www.linkedin.com/posts/the-ceo-magazine---india_mintoak-fintechindia-seriesafunding-activity-7410612940741083137-Dhet",
+      "publishedDate": null,
+      "dateConfidence": "discovered",
+      "metricsAvailable": false
     }
   ]
 }

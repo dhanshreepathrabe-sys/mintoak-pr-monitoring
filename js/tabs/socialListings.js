@@ -1,6 +1,6 @@
 let socialUiState = { platform: "all", tier: "all" };
 
-const PLATFORMS = ["X", "LinkedIn", "YouTube", "Reddit", "Instagram"];
+const PLATFORMS = ["X", "LinkedIn", "YouTube", "Reddit", "Instagram", "Facebook"];
 const TIERS = ["Owned Channel", "Verified", "High Reach", "Industry Leader", "General"];
 
 function renderSocialControls() {
