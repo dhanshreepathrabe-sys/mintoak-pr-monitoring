@@ -30,7 +30,10 @@ const TRUSTED_DOMAINS = new Set([
   "moneycontrol.com", "cxotoday.com", "thepaypers.com", "fintechmagazine.com",
   "tradingview.com", "manilatimes.net", "indiainfoline.com", "mintoak.com",
   "yourstory.com", "financialexpress.com", "hindustantimes.com",
-  "timesofindia.indiatimes.com", "aol.com", "aap.com.au"
+  "timesofindia.indiatimes.com", "aol.com", "aap.com.au",
+  "prnewswire.co.uk", "en.prnasia.com", "fintechfutures.com",
+  "electronicpaymentsinternational.com", "entrepreneur.com", "adgully.com",
+  "axis.bank.in", "cbinsights.com", "tracxn.com"
 ]);
 
 async function checkUrl(url) {

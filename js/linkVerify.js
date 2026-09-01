@@ -28,7 +28,10 @@ const TRUSTED_DOMAINS = new Set([
   "tradingview.com", "manilatimes.net", "indiainfoline.com", "mintoak.com",
   "yourstory.com", "financialexpress.com", "hindustantimes.com",
   "timesofindia.indiatimes.com", "aol.com", "aap.com.au", "linkedin.com",
-  "twitter.com", "x.com", "youtube.com", "reddit.com", "instagram.com"
+  "twitter.com", "x.com", "youtube.com", "reddit.com", "instagram.com",
+  "prnewswire.co.uk", "en.prnasia.com", "fintechfutures.com",
+  "electronicpaymentsinternational.com", "entrepreneur.com", "adgully.com",
+  "axis.bank.in", "cbinsights.com", "tracxn.com"
 ]);
 
 function scrubUrl(rawUrl) {

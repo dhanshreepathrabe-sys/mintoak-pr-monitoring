@@ -29,12 +29,16 @@ egress** (outbound HTTP to arbitrary domains — news sites, social APIs — is
 blocked by network policy; only package registries and Anthropic's own
 search tool are reachable). That shaped two decisions:
 
-1. **`data/mentions.seed.json`** — 13 real Mintoak media mentions, sourced
+1. **`data/mentions.seed.json`** — 23 real Mintoak media mentions, sourced
    via web search (Business Standard, Inc42, PR Newswire, The Paypers,
-   TradingView, Manila Times, CXOToday, FinTech Magazine, IndiaInfoline,
-   AOL), covering the ICC Loyalty acquisition, the Visa partnership, the
-   Axis Bank partnership, the 2023 PayPal Ventures round, and the HDFC Bank
-   stake. URLs are real and were returned by web search, but this sandbox
+   TradingView, Manila Times, CXOToday, FinTech Magazine, FinTech Futures,
+   YourStory, Entrepreneur India, Adgully, IndiaInfoline, AOL, and Axis
+   Bank's own newsroom), covering the ICC Loyalty acquisition, the Digiledge
+   (CBDC/bill-payments) acquisition, the Visa partnership, the Axis Bank
+   "neo for merchants" launch, the Axis Bank partnership announcement, the
+   Jan-2025 Z3Partners secondary round, the 2023 PayPal Ventures round, and
+   the HDFC Bank stake. URLs are real and were returned by web search, but
+   this sandbox
    could not perform the live HTTP status check itself (see **Link
    verification** below) — run `npm run verify:links` from a machine with
    normal internet access before trusting the "Link status" badge in
