@@ -22,7 +22,7 @@ function getFilteredState() {
   const { start, end } = getRangeBounds(appState.rangeKey, appState.customStart, appState.customEnd);
 
   const mentions = filterByDateRange(allMentions, appState.rangeKey, appState.customStart, appState.customEnd);
-  const socialPosts = filterByDateRange(allSocial, appState.rangeKey, appState.customStart, appState.customEnd);
+  const socialPosts = filterByDateRange(allSocial, appState.rangeKey, appState.customStart, appState.customEnd, undefined, "effectiveDate");
 
   return {
     mentions,

@@ -43,12 +43,20 @@ search tool are reachable). That shaped two decisions:
    verification** below) — run `npm run verify:links` from a machine with
    normal internet access before trusting the "Link status" badge in
    production.
-2. **`data/social.sample.json`** — Social Listings has **no connected
-   platform API**, so every record in it is a clearly-labeled, fictional
-   placeholder (`"sample": true`, a `SAMPLE` badge in the UI, and a banner
-   at the top of the tab). It exists to prove out the UI shape, not to
-   represent real posts about Mintoak. Do not remove the SAMPLE badges
-   without replacing the underlying data with a real API response.
+2. **`data/social.seed.json`** — Social Listings has **no authenticated
+   platform API** (checked: none of the connected marketing tools —
+   Supermetrics, Windsor.ai, Porter Metrics — have a real Mintoak social
+   account authorized), so instead of fabricating engagement metrics, these
+   are **real posts found via public web search** (`site:linkedin.com`,
+   `site:youtube.com`, etc.), each with `metricsAvailable: false` — the UI
+   shows "Engagement data unavailable" rather than a made-up like/comment
+   count. Two more honest gaps: most results are Mintoak's own official
+   posts, since public search indexes very little third-party chatter about
+   a B2B merchant-payments platform (no Reddit mentions were found at all);
+   and where the exact publish date wasn't visible in search results,
+   `dateConfidence: "discovered"` and the post is placed on the timeline by
+   the date this crawl found it (`discoveryDate`), not a guessed publish
+   date. A `WEB SEARCH` badge in the UI marks every record accordingly.
 
 ## Strict context-disambiguation filter
 
@@ -136,7 +144,7 @@ sources can be swapped in without touching the UI layer:
 | Interface | File | Replace with |
 |---|---|---|
 | `loadRawMentions()` | `js/data.js` | A real news/PR aggregation API — e.g. NewsAPI, Meltwater, Brandwatch, Google Alerts RSS, or a custom crawler — returning the same `{ id, source, sourceType, author, headline, snippet, url, publishedDate, domain, topic }` shape. |
-| `loadRawSocial()` | `js/data.js` | X API v2, LinkedIn Marketing API, YouTube Data API v3, Reddit API (PRAW/OAuth), Instagram Graph API — normalized to the `social.sample.json` shape. |
+| `loadRawSocial()` | `js/data.js` | X API v2, LinkedIn Marketing API, YouTube Data API v3, Reddit API (PRAW/OAuth), Instagram Graph API — normalized to the `social.seed.json` shape (drop `metricsAvailable: false` once real engagement numbers are available). |
 | `scoreSentiment(text)` | `js/sentiment.js` | A real NLP/LLM sentiment endpoint (must still return `{ label, confidence }`). |
 | `scripts/verify-links.mjs` | — | Already production-ready; just needs to run somewhere with outbound internet (cron/CI), on a schedule matching your refresh cadence. |
 | `SOV_COMPETITOR_BASELINE` | `js/data.js` | Replace the illustrative multiplier with a real named-competitor mention count from the same pipeline. |
@@ -171,8 +179,15 @@ js/tabs/socialListings.js    Social Listings tab
 js/tabs/sentimentTab.js      Sentiment Analysis tab
 js/app.js                    App state, tab routing, wiring, auto-refresh
 data/mentions.seed.json      Real seed dataset (see Data honesty above)
-data/social.sample.json      SAMPLE-only social data (see Data honesty above)
+data/social.seed.json        Real, web-search-discovered social posts (see Data honesty above)
 scripts/build-data.mjs       Bakes data/*.json into js/data.generated.js
 scripts/verify-links.mjs     Authoritative HTTP status check (needs real egress)
+scripts/build-artifact.mjs   Bundles the whole app into one self-contained HTML file for the published Artifact
 vendor/                      Locally vendored Chart.js 4.5.1 + jsPDF 4.2.1 (no CDN dependency)
 ```
+
+## Automated daily refresh
+
+A scheduled Routine re-crawls the web daily, updates both seed datasets,
+commits, and republishes the standalone Artifact automatically — see
+**Automated refresh** below for the schedule and exactly what each run does.

@@ -49,7 +49,11 @@ function loadRawMentions() {
 }
 
 function loadRawSocial() {
-  return (typeof SOCIAL_SAMPLE !== "undefined" ? SOCIAL_SAMPLE.posts : []);
+  return (typeof SOCIAL_SEED !== "undefined" ? SOCIAL_SEED.posts : []);
+}
+
+function getSocialDiscoveryDate() {
+  return (typeof SOCIAL_SEED !== "undefined" && SOCIAL_SEED.discoveryDate) || new Date().toISOString().slice(0, 10);
 }
 
 function getAllMentions() {
@@ -59,13 +63,28 @@ function getAllMentions() {
   return deduped.map(enrichMention).sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
 }
 
+/**
+ * Social posts are real (found via web search), but many don't carry a
+ * verifiable exact publish date. `effectiveDate` is what drives the
+ * date-range filter and timeline placement: the real publishedDate when
+ * known, otherwise the date this crawl discovered the post — never a
+ * guessed publish date. `dateConfidence` tells the UI which one it's
+ * showing so the card can say "Discovered ..." instead of "Published ...".
+ */
 function getAllSocialPosts() {
+  const discoveryDate = getSocialDiscoveryDate();
   return loadRawSocial()
     .map((p) => {
       const sentiment = scoreSentiment(p.postText);
-      return { ...p, url: scrubUrl(p.url), sentiment: sentiment.label, sentimentConfidence: sentiment.confidence };
+      return {
+        ...p,
+        url: scrubUrl(p.url),
+        sentiment: sentiment.label,
+        sentimentConfidence: sentiment.confidence,
+        effectiveDate: p.publishedDate || discoveryDate
+      };
     })
-    .sort((a, b) => new Date(b.publishedDate) - new Date(a.publishedDate));
+    .sort((a, b) => new Date(b.effectiveDate) - new Date(a.effectiveDate));
 }
 
 /**

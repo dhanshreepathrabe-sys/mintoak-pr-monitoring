@@ -68,7 +68,7 @@ function renderOverviewTab(state) {
   const sov = computeShareOfVoice(mentions.length);
 
   document.getElementById("metric-grid").innerHTML = `
-    ${metricCardHtml("Total Mentions", mentions.length, `${socialPosts.length} social (sample)`)}
+    ${metricCardHtml("Total Mentions", mentions.length, `${socialPosts.length} social posts (web search)`)}
     ${metricCardHtml("Share of Voice", `${sov}%`, "vs. tracked competitors, illustrative")}
     ${metricCardHtml("Net Sentiment Score", netSentiment > 0 ? `+${netSentiment}` : netSentiment, `${sentimentCounts.Positive} pos / ${sentimentCounts.Neutral} neu / ${sentimentCounts.Negative} neg`)}
     ${metricCardHtml("Reach / Impressions", formatReach(totalReach), "estimated, see methodology in README")}

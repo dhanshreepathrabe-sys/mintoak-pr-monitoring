@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "build:data": "node scripts/build-data.mjs",
+    "build:artifact": "node scripts/build-data.mjs && node scripts/build-artifact.mjs",
     "verify:links": "node scripts/verify-links.mjs && node scripts/build-data.mjs",
     "start": "node scripts/build-data.mjs && npx --yes serve -l 5173 ."
   }

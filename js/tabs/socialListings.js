@@ -1,7 +1,7 @@
 let socialUiState = { platform: "all", tier: "all" };
 
 const PLATFORMS = ["X", "LinkedIn", "YouTube", "Reddit", "Instagram"];
-const TIERS = ["Verified", "High Reach", "Industry Leader", "General"];
+const TIERS = ["Owned Channel", "Verified", "High Reach", "Industry Leader", "General"];
 
 function renderSocialControls() {
   return `
@@ -26,6 +26,11 @@ function filterSocialPosts(posts) {
   });
 }
 
+function socialDateLabel(p) {
+  const d = new Date(p.effectiveDate).toLocaleDateString(undefined, { month: "short", day: "numeric" });
+  return p.dateConfidence === "exact" ? d : `Found ${d}`;
+}
+
 function socialCardHtml(p) {
   const initials = p.authorName.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase();
   return `
@@ -43,15 +48,14 @@ function socialCardHtml(p) {
       <div style="font-size:13px; line-height:1.5;">${escapeHtml(p.postText)}</div>
       <div style="display:flex; gap:6px; flex-wrap:wrap;">
         <span class="badge gray">${p.authorTier}</span>
-        ${p.sample ? `<span class="badge sample" title="Synthetic demo record — no live social API connected in this build">SAMPLE</span>` : ""}
+        <span class="badge gray" title="Found via public web search, not a connected platform API">WEB SEARCH</span>
         <a href="${p.url}" target="_blank" rel="noopener noreferrer" style="font-size:11.5px;">View on ${p.platform} →</a>
       </div>
       <div class="social-metrics">
-        <span><b>${p.likes}</b> likes</span>
-        <span><b>${p.comments}</b> comments</span>
-        <span><b>${p.shares}</b> shares</span>
-        <span><b>${p.engagementRate}%</b> engagement</span>
-        <span style="margin-left:auto;">${new Date(p.publishedDate).toLocaleDateString(undefined, { month: "short", day: "numeric" })}</span>
+        ${p.metricsAvailable
+          ? `<span><b>${p.likes}</b> likes</span><span><b>${p.comments}</b> comments</span><span><b>${p.shares}</b> shares</span><span><b>${p.engagementRate}%</b> engagement</span>`
+          : `<span title="No social API is connected, so engagement counts aren't available for this post.">Engagement data unavailable</span>`}
+        <span style="margin-left:auto;">${socialDateLabel(p)}</span>
       </div>
     </div>
   `;
@@ -63,9 +67,13 @@ function renderSocialListingsTab(state) {
 
   panel.innerHTML = `
     <div class="panel" style="margin-bottom:16px; background:var(--surface-alt);">
-      <strong>Sample data notice.</strong> No X, LinkedIn, YouTube, Reddit or Instagram API is connected yet, so
-      the cards below are clearly-marked synthetic placeholders that show the intended layout, filters and metric
-      overlays. See README → "Connecting Live Data" for how to wire real social listening APIs.
+      <strong>How this data was gathered.</strong> No X, LinkedIn, YouTube, Reddit or Instagram API is
+      authenticated for Mintoak yet, so these cards are real posts found via public web search rather than a
+      connected social listening feed. Two honest gaps that come with that: engagement counts (likes/comments/
+      shares) aren't visible in search results, so they're marked unavailable rather than guessed; and most
+      results are Mintoak's own official posts, since public search indexes very little third-party chatter
+      about a B2B merchant-payments platform (no Reddit mentions were found at all). See README →
+      "Connecting Live Data" to wire up a real API for full engagement metrics and broader third-party reach.
     </div>
     ${renderSocialControls()}
     <div class="social-grid">
