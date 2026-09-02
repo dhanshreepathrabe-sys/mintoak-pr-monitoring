@@ -47,7 +47,7 @@ const DOMAIN_COUNTRY = {
   "electronicpaymentsinternational.com": "United Kingdom",
   "ibsintelligence.com": "United Kingdom", "prnewswire.co.uk": "United Kingdom",
   // Netherlands
-  "thepaypers.com": "Netherlands",
+  "thepaypers.com": "Netherlands", "dealroom.co": "Netherlands",
   // UAE
   "gccbusinessnews.com": "United Arab Emirates", "zawya.com": "United Arab Emirates",
   "adgully.me": "United Arab Emirates",
@@ -68,7 +68,8 @@ const DOMAIN_COUNTRY = {
   // Australia
   "aap.com.au": "Australia",
   // United States (entrepreneur.com is US-HQ; India edition content still published from the US-based masthead)
-  "entrepreneur.com": "United States"
+  "entrepreneur.com": "United States",
+  "indiantelevision.com": "India", "exchange4media.com": "India"
 };
 
 async function main() {

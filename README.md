@@ -16,7 +16,7 @@ npm run start   # rebuilds the data bundle and serves the app at http://localhos
 |---|---|
 | **Overview** | Total Mentions, Share of Voice, Net Sentiment Score, Reach/Impressions, Total PR Value; mentions-over-time line chart; mention volume by platform; mentions by country and by region; top trending keywords; an auto-generated, topic-grouped summary feed. |
 | **Live Mentions** | Every news/press/blog mention, with source, country, author, headline, snippet, date, reach, PR Value, and sentiment tag. Search, source-type filter, region filter, and sort by newest/reach/PR Value; a "Showing X of Y" line makes the filtered vs. total count explicit. |
-| **Social Listings** | Cross-platform social post feed (X, LinkedIn, YouTube, Reddit, Instagram, Facebook) with author-tier filtering. Real posts found via web search — see **Data honesty** below for what that does and doesn't get you. |
+| **Social Listings** | Cross-platform social post feed (X, LinkedIn, YouTube, Reddit, Instagram, Facebook) with author-tier filtering. Real posts, some with real engagement metrics from a connected social listening API, others from web search — see **Data honesty** and **Social Listening API** below for what that does and doesn't get you. |
 | **Sentiment Analysis** | Sentiment distribution donut, sentiment trend line, aspect-based breakdown (Product, Customer Service, Leadership, Bank Integrations), and a Risk & Alerts panel for high-reach negative mentions. |
 
 A global date-range filter drives every metric, chart, and feed across all
@@ -30,9 +30,11 @@ egress** (outbound HTTP to arbitrary domains — news sites, social APIs — is
 blocked by network policy; only package registries and Anthropic's own
 search tool are reachable). That shaped two decisions:
 
-1. **`data/mentions.seed.json`** — 77 real Mintoak media mentions (48
-   distinct stories after dedup), sourced via web search across roughly 56
-   outlets — including regional press on five continents: Nigeria
+1. **`data/mentions.seed.json`** — 80 real Mintoak media mentions (50
+   distinct stories after dedup), sourced via web search and (for the
+   dealroom.co, Indian Television Dot Com and Exchange4media entries) the
+   Google-search route of a connected social listening API, across roughly
+   59 outlets — including regional press on five continents: Nigeria
    (Businessday NG), Malaysia (The Malaysian Reserve), South Africa (Zawya,
    VFTT), Saudi Arabia (Jawlah, entARABI), Singapore (CEO Insights Asia),
    Kenya (TechTrends Kenya), the UAE (Adgully Middle East, GCC Business
@@ -78,31 +80,44 @@ search tool are reachable). That shaped two decisions:
    verification** below) — run `npm run verify:links` from a machine with
    normal internet access before trusting the "Link status" badge in
    production.
-2. **`data/social.seed.json`** — Social Listings has **no authenticated
-   platform API** (checked: none of the connected marketing tools —
-   Supermetrics, Windsor.ai, Porter Metrics — have a real Mintoak social
-   account authorized), so instead of fabricating engagement metrics, these
-   are **10 real, third-party-only posts found via public web search**
-   (`site:linkedin.com`, `site:youtube.com`, `site:facebook.com`, etc.) or
-   submitted directly by the user after finding them by hand
-   across LinkedIn, YouTube and Facebook — each with `metricsAvailable:
-   false`, so the UI shows "Engagement data unavailable" rather than a
-   made-up like/comment count. **Mintoak's own official channels (its
-   website, and its own LinkedIn/X/Instagram/Facebook/YouTube posts) are
-   deliberately excluded** — the team already knows what it publishes
-   itself, so an earlier pass that filled this tab mostly with Mintoak's
-   own posts (tagged `authorTier: "Owned Channel"`) was the wrong shape for
-   a listening feed; those records were removed. A VentureDesk LinkedIn
-   post was also removed after the user reported the link no longer
-   resolves — a reminder that "found via search" isn't the same as "still
-   live," which is exactly what the (currently unautomated) link
-   verification step in this project exists to catch. What remains is real
-   outside voices — `StartupRo`, `The CEO Magazine India`, individual
-   creators, a personal post from one of Mintoak's own newly-hired
-   regional leads, YourStory's own Facebook page sharing its coverage, and
-   third-party podcast/interview videos — still thin, because public
-   search indexes very little third-party chatter about a B2B
-   merchant-payments platform, and no Reddit mentions were found at all.
+2. **`data/social.seed.json`** — Social Listings is now a mix of two
+   sourcing methods. None of the connected marketing tools (Supermetrics,
+   Windsor.ai, Porter Metrics) have a real Mintoak social account
+   authorized, but a separate **Social Listening API connector** (see
+   **Social Listening API** below) became available mid-project and
+   supplies real, on-demand keyword search across X, LinkedIn, YouTube and
+   Reddit — with real API-returned engagement numbers where the platform
+   provides them. Of the **27 real, third-party-only posts** here, 17 came
+   from that connector (`metricsAvailable: true`, real likes/comments/
+   shares, and views + a computed engagement rate where the platform
+   exposes view counts) and 10 are earlier finds from public web search
+   before the connector existed (`metricsAvailable: false`, so the UI
+   shows "Engagement data unavailable" rather than a made-up number) or
+   one submitted directly by the user after finding it by hand.
+   **Mintoak's own official channels (its website, and its own
+   LinkedIn/X/Instagram/Facebook/YouTube posts) are deliberately
+   excluded** — the team already knows what it publishes itself, so an
+   earlier pass that filled this tab mostly with Mintoak's own posts
+   (tagged `authorTier: "Owned Channel"`) was the wrong shape for a
+   listening feed; those records were removed, and the connector's own
+   results are filtered the same way (its `mintoak-innovations-...`
+   company-page and `mintoak4643` YouTube-channel posts are skipped). A
+   VentureDesk LinkedIn post was also removed after the user reported the
+   link no longer resolves — a reminder that "found via search" isn't the
+   same as "still live," which is exactly what the (currently
+   unautomated) link verification step in this project exists to catch.
+   The connector surfaced real voices web search couldn't: the deal's own
+   law firm (Spice Route Legal) posting about its advisory role, an
+   investor (Pravega Ventures) telling the founders' backstory, several
+   independent commentators' reaction posts, the first genuinely
+   Arabic-language (Jawlah) and German-language (The Analyst) posts found
+   in this dataset, a Kenyan fintech analyst's take, and — deliberately
+   included rather than filtered out — one critical/governance-scrutiny
+   post about an HDFC Bank executive's early personal investment in
+   Mintoak, so this feed isn't just the positive coverage. Still thin on
+   Instagram, Facebook and TikTok (those routes return discovery results,
+   not full post content, in this connector), and still no Reddit posts
+   that are actually about the fintech company.
    Every post carries its **actual publish date**: `dateConfidence:
    "exact"` when a search result stated it directly, `"estimated"` when
    it's a well-reasoned estimate — either anchored to the news event the
@@ -121,19 +136,24 @@ search tool are reachable). That shaped two decisions:
    than API-sourced.
 
 **On "1210+ social listings and 50+ mentions"**: 50+ real mentions turned
-out to be findable — the 77 raw / 48 distinct here clear it. 1210+ social
-listings did not, and realistically can't via web search: individual
-posts on X, Instagram and (mostly) LinkedIn aren't search-engine-indexed
-at the level of a specific status update — search surfaces a company's
-profile pages, its more prominent public posts, and syndicated news-media
-social shares, which is exactly what these 9 (third-party-only) records
-are. A number like 1,210 is the shape of what a real social-listening API
-(X API v2, LinkedIn, Meltwater, Brandwatch, Sprinklr, etc.) returns — it
-counts things like replies, retweets-with-comment and
-impressions-adjacent mentions that a search index was never built to
-surface individually. Wiring one of those up (see **Connecting live
-data** below) is the actual path to that number; no further web-search
-crawling will get there honestly.
+out to be findable — the 80 raw / 50 distinct here clear it. A real social
+listening API (X, LinkedIn, YouTube, Reddit search — see **Social
+Listening API** below) got connected mid-project, which moved Social
+Listings from 9 web-search-found records to 27, several now carrying
+real, API-returned engagement numbers instead of "unavailable." Even so,
+1210+ did not turn up, and this API is not the reason it wouldn't: it is
+a keyword-search tool queried on demand (its own documentation says
+results may be incomplete and explicitly disclaims "continuous
+monitoring... complete platform coverage"), not a standing subscription
+that has been passively accumulating every mention of a mid-size B2B
+merchant-payments brand over months or years. A number like 1,210 is the
+shape of a continuous-monitoring contract's cumulative count (Meltwater,
+Brandwatch, Sprinklr, or this same API's routes called on a recurring
+schedule and accumulated into a database over time) — not something any
+on-demand search, however good, reconstructs retroactively in one sitting.
+Wiring this API into the daily refresh Routine so it accumulates results
+over time (see **Automated daily refresh**) is the realistic path toward
+a much larger number; a single crawl session, honestly, is not.
 
 **A word on the connected Google Drive**: it was checked for real PR
 agency material per a later request, and turned up files that look like
@@ -245,10 +265,50 @@ domain is added to `data/mentions.seed.json`, then re-run
 by raw country (the Overview "Mentions by country" bar chart) and by a
 seven-region bucketing — India, Middle East, Africa, Southeast Asia,
 North America, Europe, Oceania (the "Mentions by region" panel, and the
-region filter on Live Mentions). As of this dataset that's 48 distinct
+region filter on Live Mentions). As of this dataset that's 50 distinct
 stories across 12 countries and 6 regions, dominated by India (where
 Mintoak is headquartered and most of its press coverage originates) —
 see the Overview tab for the live current breakdown.
+
+## Social Listening API
+
+Partway through this project a real, credentialed social listening
+connector (`SocialListeningAPI`) became available in the working
+environment — the first genuine social-platform API this project has had
+access to, as opposed to reading public web-search result snippets. It
+exposes keyword search against X, LinkedIn, YouTube, Reddit, Facebook,
+TikTok, Instagram (discovery only) and Google, each call costing 1-7
+workspace credits, and it returns real post content plus, where the
+platform provides it, real engagement counts (likes, comments, shares,
+views).
+
+What it is **not**: a standing, continuously-running monitor. Every call
+is a one-shot keyword query against whatever the platform's own search
+currently surfaces — the tool's own documentation is explicit that
+"results may be incomplete" and disclaims "continuous monitoring...
+complete platform coverage." Running it once, as this project has so far,
+finds a snapshot of currently-discoverable posts, not a full historical
+archive — that's why Social Listings jumped from 9 to 27 records in one
+session rather than to 1,210+ (see **On "1210+ social listings"** above).
+
+Every result is still run through the same honesty gate as before adding
+anything: Mintoak's own official pages/channels are filtered out by
+author (`mintoak-innovations-private-limited` on LinkedIn,
+`mintoak4643`/"Mintoak Innovations Private Limited" on YouTube), off-topic
+results (job postings, unrelated BlackSoil-fund coverage that doesn't
+actually mention Mintoak) are left out, and every included post's full
+text was read before being summarized into `postText` — nothing here is
+a title guessed from a URL slug. The connector's engagement numbers are
+recorded exactly as returned; where a platform doesn't expose a metric
+(LinkedIn's search doesn't return view counts, for instance), that field
+is simply omitted rather than backfilled with a guess, and the UI's
+engagement-rate percentage only renders when a real view count exists to
+divide by.
+
+The realistic path to much larger, continuously-updated numbers is
+wiring this connector into the daily refresh Routine (see **Automated
+daily refresh**) so its results accumulate in the dataset over time,
+rather than relying on one-off manual runs like this one.
 
 ## Link verification
 

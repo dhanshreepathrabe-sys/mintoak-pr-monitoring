@@ -41,7 +41,8 @@ const TRUSTED_DOMAINS = new Set([
   "paypal-corp.com", "businesstoday.in", "fiinews.com", "techtrendske.co.ke", "indiasnews.net",
   "marcamoney.com", "apnnews.com", "passionateinmarketing.com", "ipocentral.in",
   "shopifreaks.com", "businessday.ng", "themalaysianreserve.com", "zawya.com",
-  "jawlah.co", "ceoinsightsasia.com", "adgully.me", "vftt.co.za", "entarabi.com", "nz.finance.yahoo.com", "finance.yahoo.com"
+  "jawlah.co", "ceoinsightsasia.com", "adgully.me", "vftt.co.za", "entarabi.com", "nz.finance.yahoo.com", "finance.yahoo.com",
+  "indiantelevision.com", "exchange4media.com", "dealroom.co"
 ]);
 
 function scrubUrl(rawUrl) {

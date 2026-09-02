@@ -59,8 +59,8 @@ function socialCardHtml(p) {
       </div>
       <div class="social-metrics">
         ${p.metricsAvailable
-          ? `<span><b>${p.likes}</b> likes</span><span><b>${p.comments}</b> comments</span><span><b>${p.shares}</b> shares</span><span><b>${p.engagementRate}%</b> engagement</span>`
-          : `<span title="No social API is connected, so engagement counts aren't available for this post.">Engagement data unavailable</span>`}
+          ? `<span><b>${p.likes}</b> likes</span><span><b>${p.comments}</b> comments</span><span><b>${p.shares}</b> shares</span>${typeof p.views === "number" ? `<span><b>${formatReach(p.views)}</b> views</span><span><b>${p.engagementRate}%</b> engagement</span>` : ""}`
+          : `<span title="No social API result was available for this post, so engagement counts aren't recorded rather than guessed.">Engagement data unavailable</span>`}
         <span style="margin-left:auto;" title="${socialDateTitle(p)}">${socialDateLabel(p)}</span>
       </div>
     </div>
@@ -73,17 +73,18 @@ function renderSocialListingsTab(state) {
 
   panel.innerHTML = `
     <div class="panel" style="margin-bottom:16px; background:var(--surface-alt);">
-      <strong>How this data was gathered.</strong> No X, LinkedIn, YouTube, Reddit or Instagram API is
-      authenticated for Mintoak yet, so these cards are real, third-party-only posts found via public web
-      search rather than a connected social listening feed. Mintoak's own website and its own official
+      <strong>How this data was gathered.</strong> Posts marked with real like/comment/share (and, where the
+      platform exposes it, view) counts come from a connected social listening API queried on demand across
+      X, LinkedIn, YouTube and Reddit — not a guess, not a scrape of search-result snippets. Posts without
+      metrics predate that connector and were found via public web search instead, so their engagement is
+      marked unavailable rather than invented. Either way, Mintoak's own website and its own official
       LinkedIn/X/Instagram/Facebook/YouTube posts are deliberately excluded — this feed is for outside
       listening, not a mirror of what the team already publishes. Dates are the post's actual publish date
       (marked "~" when it's a well-reasoned estimate anchored to the news event the post is visibly reacting
-      to, because the platform's own timestamp wasn't visible in search results — hover a date for why).
-      Engagement counts (likes/comments/shares) aren't visible in search results either, so they're marked
-      unavailable rather than guessed. Third-party chatter about a B2B merchant-payments platform is
-      genuinely thin online — no Reddit mentions were found at all. See README → "Connecting Live Data" to
-      wire up a real API for full engagement metrics and broader third-party reach.
+      to, or decoded from a LinkedIn/X Snowflake-style post ID — hover a date for why). This is an on-demand
+      query, not continuous real-time monitoring, and it does not cover every platform (Instagram, Facebook
+      and TikTok searches return discovery results, not full post content) — see README → "Connecting Live
+      Data" for the current scope and how to extend it.
     </div>
     ${renderSocialControls()}
     <div class="social-grid">
