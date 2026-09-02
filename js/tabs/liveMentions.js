@@ -1,4 +1,4 @@
-let liveMentionsUiState = { search: "", sourceType: "all", sort: "newest" };
+let liveMentionsUiState = { search: "", sourceType: "all", sort: "newest", region: "all" };
 
 function sentimentBadge(label, confidence) {
   const cls = label.toLowerCase();
@@ -11,13 +11,17 @@ function domainBadge(authority) {
     : `<span class="badge unverified">Unrecognized domain</span>`;
 }
 
-function renderLiveMentionsControls() {
+function renderLiveMentionsControls(mentions) {
   const sourceTypes = ["all", "News", "Blogs", "Forum", "Press Release"];
+  const regions = ["all", ...getGeographyDistribution(mentions).byRegion.map((r) => r.label)];
   return `
     <div class="controls-row">
       <input id="lm-search" class="search-input" type="search" placeholder="Search mentions by headline, snippet, or source…" value="${liveMentionsUiState.search}" />
       <select id="lm-sourcetype" class="filter-select">
         ${sourceTypes.map((t) => `<option value="${t}" ${liveMentionsUiState.sourceType === t ? "selected" : ""}>${t === "all" ? "All source types" : t}</option>`).join("")}
+      </select>
+      <select id="lm-region" class="filter-select">
+        ${regions.map((r) => `<option value="${r}" ${liveMentionsUiState.region === r ? "selected" : ""}>${r === "all" ? "All regions" : r}</option>`).join("")}
       </select>
       <select id="lm-sort" class="filter-select">
         <option value="newest" ${liveMentionsUiState.sort === "newest" ? "selected" : ""}>Newest first</option>
@@ -41,6 +45,9 @@ function filterAndSortMentions(mentions) {
     const wanted = liveMentionsUiState.sourceType === "Blogs" ? "Blog" : liveMentionsUiState.sourceType;
     out = out.filter((m) => m.sourceType === wanted);
   }
+  if (liveMentionsUiState.region !== "all") {
+    out = out.filter((m) => getRegionForCountry(m.country) === liveMentionsUiState.region);
+  }
   out = [...out].sort((a, b) => {
     if (liveMentionsUiState.sort === "reach") return b.reach - a.reach;
     if (liveMentionsUiState.sort === "prvalue") return b.prValue - a.prValue;
@@ -59,7 +66,7 @@ function mentionCardHtml(m) {
   return `
     <div class="mention-card">
       <div class="mention-top">
-        <div class="mention-source">${escapeHtml(m.source)} <span class="badge gray">${m.sourceType}</span></div>
+        <div class="mention-source">${escapeHtml(m.source)} <span class="badge gray">${m.sourceType}</span> <span class="badge gray" title="Region: ${escapeHtml(getRegionForCountry(m.country))}">${escapeHtml(m.country || "Unknown")}</span></div>
         <div style="display:flex; gap:6px; flex-wrap:wrap;">
           ${sentimentBadge(m.sentiment, m.sentimentConfidence)}
         </div>
@@ -89,9 +96,13 @@ function mentionCardHtml(m) {
 function renderLiveMentionsTab(state) {
   const panel = document.getElementById("panel-live-mentions");
   const filtered = filterAndSortMentions(state.mentions);
+  const totalLabel = filtered.length === state.mentions.length
+    ? `${state.mentions.length} total mention${state.mentions.length === 1 ? "" : "s"} in range`
+    : `Showing ${filtered.length} of ${state.mentions.length} total mentions in range`;
 
   panel.innerHTML = `
-    ${renderLiveMentionsControls()}
+    ${renderLiveMentionsControls(state.mentions)}
+    <div style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">${totalLabel}</div>
     <div class="mention-list">
       ${filtered.length ? filtered.map(mentionCardHtml).join("") : `<div class="empty-state">No mentions match your filters in this timeframe.</div>`}
     </div>
@@ -103,6 +114,10 @@ function renderLiveMentionsTab(state) {
   });
   document.getElementById("lm-sourcetype").addEventListener("change", (e) => {
     liveMentionsUiState.sourceType = e.target.value;
+    renderLiveMentionsTab(state);
+  });
+  document.getElementById("lm-region").addEventListener("change", (e) => {
+    liveMentionsUiState.region = e.target.value;
     renderLiveMentionsTab(state);
   });
   document.getElementById("lm-sort").addEventListener("change", (e) => {

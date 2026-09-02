@@ -11,7 +11,8 @@ const MENTIONS_SEED = [
     "url": "https://www.business-standard.com/companies/news/mumbai-based-mintoak-acquires-icc-loyalty-to-deepen-presence-in-west-asia-126080401180_1.html",
     "publishedDate": "2026-08-04",
     "domain": "business-standard.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "India"
   },
   {
     "id": "m-2026-08-04-icc-inc42",
@@ -23,7 +24,8 @@ const MENTIONS_SEED = [
     "url": "https://inc42.com/buzz/mintoak-acquires-uae-based-icc-loyalty-to-expand-fintech-stack-for-banks/",
     "publishedDate": "2026-08-04",
     "domain": "inc42.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "India"
   },
   {
     "id": "m-2026-08-04-icc-manilatimes",
@@ -35,7 +37,8 @@ const MENTIONS_SEED = [
     "url": "https://www.manilatimes.net/2026/08/04/tmt-newswire/pr-newswire/mintoak-acquires-middle-east-headquartered-fintech-icc-loyalty/2397617",
     "publishedDate": "2026-08-04",
     "domain": "manilatimes.net",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "Philippines"
   },
   {
     "id": "m-2026-06-16-visa-prnewswire",
@@ -47,7 +50,8 @@ const MENTIONS_SEED = [
     "url": "https://www.prnewswire.com/apac/news-releases/visa-and-mintoak-join-forces-to-bring-merchant-saas-capabilities-to-acquirers-across-asia-pacific-302797959.html",
     "publishedDate": "2026-06-16",
     "domain": "prnewswire.com",
-    "topic": "Bank / Network Partnership"
+    "topic": "Bank / Network Partnership",
+    "country": "United States"
   },
   {
     "id": "m-2026-06-16-visa-tradingview",
@@ -59,7 +63,8 @@ const MENTIONS_SEED = [
     "url": "https://www.tradingview.com/news/prnewswire:df5f27e504a0d:0-visa-and-mintoak-join-forces-to-bring-merchant-saas-capabilities-to-acquirers-across-asia-pacific/",
     "publishedDate": "2026-06-16",
     "domain": "tradingview.com",
-    "topic": "Bank / Network Partnership"
+    "topic": "Bank / Network Partnership",
+    "country": "United States"
   },
   {
     "id": "m-2026-06-17-visa-manilatimes",
@@ -71,7 +76,8 @@ const MENTIONS_SEED = [
     "url": "https://www.manilatimes.net/2026/06/17/tmt-newswire/pr-newswire/visa-and-mintoak-join-forces-to-bring-merchant-saas-capabilities-to-acquirers-across-asia-pacific/2367155",
     "publishedDate": "2026-06-17",
     "domain": "manilatimes.net",
-    "topic": "Bank / Network Partnership"
+    "topic": "Bank / Network Partnership",
+    "country": "Philippines"
   },
   {
     "id": "m-2026-06-16-visa-paypers",
@@ -83,7 +89,8 @@ const MENTIONS_SEED = [
     "url": "https://thepaypers.com/payments/news/visa-and-mintoak-partner-on-merchant-saas-for-asia-pacific-acquirers",
     "publishedDate": "2026-06-16",
     "domain": "thepaypers.com",
-    "topic": "Bank / Network Partnership"
+    "topic": "Bank / Network Partnership",
+    "country": "Netherlands"
   },
   {
     "id": "m-2026-06-16-visa-aol",
@@ -95,7 +102,8 @@ const MENTIONS_SEED = [
     "url": "https://www.aol.com/articles/visa-mintoak-join-forces-bring-030000000.html",
     "publishedDate": "2026-06-16",
     "domain": "aol.com",
-    "topic": "Bank / Network Partnership"
+    "topic": "Bank / Network Partnership",
+    "country": "United States"
   },
   {
     "id": "m-2025-01-cxo-axis",
@@ -107,7 +115,8 @@ const MENTIONS_SEED = [
     "url": "https://cxotoday.com/press-release/mintoak-announces-partnership-with-axis-bank-to-enable-smes-with-merchant-payments-and-business-solutions/",
     "publishedDate": "2025-01-22",
     "domain": "cxotoday.com",
-    "topic": "Bank / Network Partnership"
+    "topic": "Bank / Network Partnership",
+    "country": "India"
   },
   {
     "id": "m-2023-02-fintechmag-funding",
@@ -119,7 +128,8 @@ const MENTIONS_SEED = [
     "url": "https://fintechmagazine.com/articles/indias-fintech-saas-platform-mintoak-receives-20mn-backing",
     "publishedDate": "2023-02-14",
     "domain": "fintechmagazine.com",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "United Kingdom"
   },
   {
     "id": "m-2022-12-bs-hdfc-stake",
@@ -131,7 +141,8 @@ const MENTIONS_SEED = [
     "url": "https://www.business-standard.com/article/news-cm/hdfc-bank-to-acquire-7-75-stake-in-mintoak-for-rs-31-cr-122121400329_1.html",
     "publishedDate": "2022-12-14",
     "domain": "business-standard.com",
-    "topic": "Bank / Network Partnership"
+    "topic": "Bank / Network Partnership",
+    "country": "India"
   },
   {
     "id": "m-2024-prnewswire-msme",
@@ -143,7 +154,8 @@ const MENTIONS_SEED = [
     "url": "https://www.prnewswire.com/in/news-releases/mintoak-develops-merchant-solutions-to-fuel-business-growth-for-msmes-861588478.html",
     "publishedDate": "2024-05-09",
     "domain": "prnewswire.com",
-    "topic": "Product / Platform"
+    "topic": "Product / Platform",
+    "country": "United States"
   },
   {
     "id": "m-2026-04-leadersspeak-ceo",
@@ -155,7 +167,8 @@ const MENTIONS_SEED = [
     "url": "https://www.indiainfoline.com/news/leaders-speak/raman-khanduja-co-founder-and-ceo-mintoak-innovations",
     "publishedDate": "2026-04-10",
     "domain": "indiainfoline.com",
-    "topic": "Leadership"
+    "topic": "Leadership",
+    "country": "India"
   },
   {
     "id": "m-2024-08-20-axis-neo-official",
@@ -167,7 +180,8 @@ const MENTIONS_SEED = [
     "url": "https://www.axis.bank.in/about-us/press-releases/axis-bank-launches-neo-for-merchants-one-stop-solution-for-the-merchant-community-in-partnership-with-visa-and-mintoak",
     "publishedDate": "2024-08-20",
     "domain": "axis.bank.in",
-    "topic": "Product / Platform"
+    "topic": "Product / Platform",
+    "country": "India"
   },
   {
     "id": "m-2024-08-20-axis-neo-adgully",
@@ -179,7 +193,8 @@ const MENTIONS_SEED = [
     "url": "https://www.adgully.com/axis-bank-launches-neo-for-merchants-with-visa-and-mintoak-149398.html",
     "publishedDate": "2024-08-20",
     "domain": "adgully.com",
-    "topic": "Product / Platform"
+    "topic": "Product / Platform",
+    "country": "India"
   },
   {
     "id": "m-2025-01-09-z3-inc42",
@@ -191,7 +206,8 @@ const MENTIONS_SEED = [
     "url": "https://inc42.com/buzz/mintoak-closes-inr-71-cr-secondary-deal-from-z3partners/",
     "publishedDate": "2025-01-09",
     "domain": "inc42.com",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "India"
   },
   {
     "id": "m-2025-01-09-z3-yourstory",
@@ -203,7 +219,8 @@ const MENTIONS_SEED = [
     "url": "https://yourstory.com/2025/01/saas-platform-mintoak-closes-rs-71-cr-secondary-investment-z3partners",
     "publishedDate": "2025-01-09",
     "domain": "yourstory.com",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "India"
   },
   {
     "id": "m-2025-01-09-z3-entrepreneur",
@@ -215,7 +232,8 @@ const MENTIONS_SEED = [
     "url": "https://www.entrepreneur.com/en-in/news-and-trends/mintoak-secures-inr-71-cr-in-secondary-funding-round-led-by/485323",
     "publishedDate": "2025-01-09",
     "domain": "entrepreneur.com",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "United States"
   },
   {
     "id": "m-2025-03-04-digiledge-bs",
@@ -227,7 +245,8 @@ const MENTIONS_SEED = [
     "url": "https://www.business-standard.com/amp/companies/news/paypal-backed-mintoak-strikes-india-s-1st-e-rupee-deal-worth-3-5-mn-125030400006_1.html",
     "publishedDate": "2025-03-04",
     "domain": "business-standard.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "India"
   },
   {
     "id": "m-2025-03-04-digiledge-yourstory",
@@ -239,7 +258,8 @@ const MENTIONS_SEED = [
     "url": "https://yourstory.com/2025/03/mintoak-acquires-digiledge-to-expand-bill-payments-cbdc-capabilities",
     "publishedDate": "2025-03-04",
     "domain": "yourstory.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "India"
   },
   {
     "id": "m-2025-03-04-digiledge-inc42",
@@ -251,7 +271,8 @@ const MENTIONS_SEED = [
     "url": "https://inc42.com/buzz/mintoak-acquires-digiledge-to-add-cbdc-bill-payments-capabilities/",
     "publishedDate": "2025-03-04",
     "domain": "inc42.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "India"
   },
   {
     "id": "m-2026-08-04-icc-fintechfutures",
@@ -263,7 +284,8 @@ const MENTIONS_SEED = [
     "url": "https://www.fintechfutures.com/m-a/mintoak-expands-into-customer-loyalty-and-rewards-with-icc-loyalty-acquisition",
     "publishedDate": "2026-08-04",
     "domain": "fintechfutures.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "United Kingdom"
   },
   {
     "id": "m-2026-08-04-icc-prnewswireuk",
@@ -275,7 +297,8 @@ const MENTIONS_SEED = [
     "url": "https://www.prnewswire.co.uk/news-releases/icc-loyalty-joins-mintoak-to-build-a-unified-payments-and-engagement-os-for-banks-302841287.html",
     "publishedDate": "2026-08-04",
     "domain": "prnewswire.co.uk",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "United Kingdom"
   },
   {
     "id": "m-2026-05-06-ibsi-banks-rethink",
@@ -287,7 +310,8 @@ const MENTIONS_SEED = [
     "url": "https://ibsintelligence.com/ibsi-news/banks-rethink-merchant-growth-interview-with-raman-khanduja-co-founder-and-ceo-at-mintoak/",
     "publishedDate": "2026-05-06",
     "domain": "ibsintelligence.com",
-    "topic": "Leadership"
+    "topic": "Leadership",
+    "country": "United Kingdom"
   },
   {
     "id": "m-2024-05-02-sea-mena-ibsi",
@@ -299,7 +323,8 @@ const MENTIONS_SEED = [
     "url": "https://ibsintelligence.com/ibsi-news/mintoak-forays-into-sea-mena-regions-with-strategic-appointments/",
     "publishedDate": "2024-05-02",
     "domain": "ibsintelligence.com",
-    "topic": "Global Expansion"
+    "topic": "Global Expansion",
+    "country": "United Kingdom"
   },
   {
     "id": "m-2024-05-02-sea-mena-cxotoday",
@@ -311,7 +336,8 @@ const MENTIONS_SEED = [
     "url": "https://cxotoday.com/media-coverage/mintoak-expands-global-footprint-with-strategic-leadership-appointments/",
     "publishedDate": "2024-05-02",
     "domain": "cxotoday.com",
-    "topic": "Global Expansion"
+    "topic": "Global Expansion",
+    "country": "India"
   },
   {
     "id": "m-2024-05-02-sea-mena-mediabrief",
@@ -323,7 +349,8 @@ const MENTIONS_SEED = [
     "url": "https://mediabrief.com/mintoak-expands-globally-with-new-leadership/",
     "publishedDate": "2024-05-02",
     "domain": "mediabrief.com",
-    "topic": "Global Expansion"
+    "topic": "Global Expansion",
+    "country": "India"
   },
   {
     "id": "m-2024-04-18-merchant-mate",
@@ -335,7 +362,8 @@ const MENTIONS_SEED = [
     "url": "https://www.entrepreneur.com/en-in/finance/meet-the-merchant-mate-raman-khanduja-co-founder-and-ceo/472836",
     "publishedDate": "2024-04-18",
     "domain": "entrepreneur.com",
-    "topic": "Leadership"
+    "topic": "Leadership",
+    "country": "United States"
   },
   {
     "id": "m-2025-09-05-analyticsinsight-podcast",
@@ -347,7 +375,8 @@ const MENTIONS_SEED = [
     "url": "https://www.analyticsinsight.net/podcast/digitization-and-digital-payments-expert-insights-from-raman-khanduja-mintoak",
     "publishedDate": "2025-09-05",
     "domain": "analyticsinsight.net",
-    "topic": "Leadership"
+    "topic": "Leadership",
+    "country": "India"
   },
   {
     "id": "m-2026-08-04-icc-tribuneindia",
@@ -359,7 +388,8 @@ const MENTIONS_SEED = [
     "url": "https://www.tribuneindia.com/news/business/mintoak-acquires-middle-east-headquartered-fintech-icc-loyalty-2-2/amp",
     "publishedDate": "2026-08-04",
     "domain": "tribuneindia.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "India"
   },
   {
     "id": "m-2026-08-04-icc-prnewswireuk-2",
@@ -371,7 +401,8 @@ const MENTIONS_SEED = [
     "url": "https://www.prnewswire.co.uk/news-releases/mintoak-acquires-middle-east-headquartered-fintech-icc-loyalty-302841269.html",
     "publishedDate": "2026-08-04",
     "domain": "prnewswire.co.uk",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "United Kingdom"
   },
   {
     "id": "m-2025-03-04-digiledge-indianstartupnews",
@@ -383,7 +414,8 @@ const MENTIONS_SEED = [
     "url": "https://indianstartupnews.com/news/merchant-saas-platform-mintoak-buys-fintech-startup-digiledge-8777321",
     "publishedDate": "2025-03-04",
     "domain": "indianstartupnews.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "India"
   },
   {
     "id": "m-2025-03-04-digiledge-siliconindia",
@@ -395,7 +427,8 @@ const MENTIONS_SEED = [
     "url": "https://www.siliconindia.com/news/startups/merchant-saas-platform-mintoak-procures-fintech-startup-digiledge-nid-234741-cid-19.html",
     "publishedDate": "2025-03-04",
     "domain": "siliconindia.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "India"
   },
   {
     "id": "m-2025-03-04-digiledge-elets",
@@ -407,7 +440,8 @@ const MENTIONS_SEED = [
     "url": "https://bfsi.eletsonline.com/mintoak-acquires-digiledge-to-expand-digital-payment-solutions-for-smes/",
     "publishedDate": "2025-03-04",
     "domain": "eletsonline.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "India"
   },
   {
     "id": "m-2025-12-26-funding2500cr-entrackr",
@@ -419,7 +453,8 @@ const MENTIONS_SEED = [
     "url": "https://entrackr.com/exclusive/exclusive-mintoak-to-raise-fresh-funding-at-rs-2500-cr-valuation-10947842",
     "publishedDate": "2025-12-26",
     "domain": "entrackr.com",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "India"
   },
   {
     "id": "m-2025-12-26-funding2500cr-theindiabizz",
@@ -431,7 +466,8 @@ const MENTIONS_SEED = [
     "url": "https://theindiabizz.com/mintoak-eyes-fresh-funding-at-%E2%82%B92500-cr-valuation/",
     "publishedDate": "2025-12-26",
     "domain": "theindiabizz.com",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "India"
   },
   {
     "id": "m-2025-12-26-funding2500cr-financeoutlook",
@@ -443,7 +479,8 @@ const MENTIONS_SEED = [
     "url": "https://www.financeoutlookindia.com/news/merchant-saas-platform-mintoak-raises-rs-53-cr-in-series-a-nwid-7159.html",
     "publishedDate": "2025-12-26",
     "domain": "financeoutlookindia.com",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "India"
   },
   {
     "id": "m-2025-12-26-funding2500cr-startupnewsfyi",
@@ -455,7 +492,8 @@ const MENTIONS_SEED = [
     "url": "https://startupnews.fyi/2025/12/26/mintoak-to-raise-fresh-funding-at-rs-2500-cr-valuation/",
     "publishedDate": "2025-12-26",
     "domain": "startupnews.fyi",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "India"
   },
   {
     "id": "m-2026-03-02-icc-scoop-entrackr",
@@ -467,7 +505,8 @@ const MENTIONS_SEED = [
     "url": "https://entrackr.com/exclusive/exclusive-mintoak-plans-to-acquire-dubai-based-icc-loyalty-11169205",
     "publishedDate": "2026-03-02",
     "domain": "entrackr.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "India"
   },
   {
     "id": "m-2026-08-08-blacksoil-entrackr",
@@ -479,7 +518,8 @@ const MENTIONS_SEED = [
     "url": "https://entrackr.com/snippets/blacksoil-funds-rs-80-cr-debt-for-mintoaks-icc-loyalty-acquisition-12235773",
     "publishedDate": "2026-08-08",
     "domain": "entrackr.com",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "India"
   },
   {
     "id": "m-2026-08-08-blacksoil-siliconindia",
@@ -491,7 +531,8 @@ const MENTIONS_SEED = [
     "url": "https://www.siliconindia.com/news/startups/blacksoil-extends-rs-80-crore-debt-to-back-mintoak-acquisition-nid-241823-cid-19.html",
     "publishedDate": "2026-08-08",
     "domain": "siliconindia.com",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "India"
   },
   {
     "id": "m-2026-08-08-blacksoil-startupstorymedia",
@@ -503,7 +544,8 @@ const MENTIONS_SEED = [
     "url": "https://startupstorymedia.com/mintoak-secures-rs-80-crore-debt-funding-for-icc-loyalty-acquisition/",
     "publishedDate": "2026-08-08",
     "domain": "startupstorymedia.com",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "India"
   },
   {
     "id": "m-2026-08-08-blacksoil-indianstartuptimes",
@@ -515,7 +557,8 @@ const MENTIONS_SEED = [
     "url": "https://www.indianstartuptimes.com/news/mintoak-secures-rs-80-crore-acquisition-financing-from-blacksoil-to-complete-icc-loyalty-acquisition/",
     "publishedDate": "2026-08-08",
     "domain": "indianstartuptimes.com",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "India"
   },
   {
     "id": "m-2026-08-04-icc-gccbusinessnews",
@@ -527,7 +570,8 @@ const MENTIONS_SEED = [
     "url": "https://www.gccbusinessnews.com/mintoak-acquires-uae-fintech-icc-loyalty/",
     "publishedDate": "2026-08-04",
     "domain": "gccbusinessnews.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "United Arab Emirates"
   },
   {
     "id": "m-2024-05-02-sea-mena-outlookbusiness",
@@ -539,7 +583,8 @@ const MENTIONS_SEED = [
     "url": "https://www.outlookbusiness.com/corporate/mintoak-names-new-leaders-to-drive-international-expansion",
     "publishedDate": "2024-05-02",
     "domain": "outlookbusiness.com",
-    "topic": "Global Expansion"
+    "topic": "Global Expansion",
+    "country": "India"
   },
   {
     "id": "m-2026-08-04-icc-aninews",
@@ -551,7 +596,8 @@ const MENTIONS_SEED = [
     "url": "https://aninews.in/news/business/mintoak-acquires-middle-east-headquartered-fintech-icc-loyalty20260804110738/",
     "publishedDate": "2026-08-04",
     "domain": "aninews.in",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "India"
   },
   {
     "id": "m-2026-08-04-icc-latestly",
@@ -563,7 +609,8 @@ const MENTIONS_SEED = [
     "url": "https://www.latestly.com/agency-news/business-news-mintoak-acquires-middle-east-headquartered-fintech-icc-loyalty-7544844.html",
     "publishedDate": "2026-08-04",
     "domain": "latestly.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "India"
   },
   {
     "id": "m-2024-08-12-yourstory-empowering-banks",
@@ -575,7 +622,8 @@ const MENTIONS_SEED = [
     "url": "https://yourstory.com/2024/08/saas-startup-mintoak-banks-small-businesses-merchants",
     "publishedDate": "2024-08-12",
     "domain": "yourstory.com",
-    "topic": "Product / Platform"
+    "topic": "Product / Platform",
+    "country": "India"
   },
   {
     "id": "m-2021-08-28-yourstory-hdfc-52pct",
@@ -587,7 +635,8 @@ const MENTIONS_SEED = [
     "url": "https://yourstory.com/enterprise-story/2021/08/hdfcbank-takes-52percent-stake-mintoak-innovations",
     "publishedDate": "2021-08-28",
     "domain": "yourstory.com",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "India"
   },
   {
     "id": "m-2022-09-22-ians-investing",
@@ -599,7 +648,8 @@ const MENTIONS_SEED = [
     "url": "https://in.investing.com/news/fintech-platform-mintoak-enabling-banks-to-digitally-empower-merchant-ecosystem-3352808",
     "publishedDate": "2022-09-22",
     "domain": "investing.com",
-    "topic": "Product / Platform"
+    "topic": "Product / Platform",
+    "country": "United States"
   },
   {
     "id": "m-2022-09-22-ians-siasat",
@@ -611,7 +661,8 @@ const MENTIONS_SEED = [
     "url": "https://www.siasat.com/fintech-platform-mintoak-enabling-banks-to-digitally-empower-merchant-ecosystem-2418462/",
     "publishedDate": "2022-09-22",
     "domain": "siasat.com",
-    "topic": "Product / Platform"
+    "topic": "Product / Platform",
+    "country": "India"
   },
   {
     "id": "m-2022-09-22-ians-indianewengland",
@@ -623,7 +674,8 @@ const MENTIONS_SEED = [
     "url": "https://indianewengland.com/fintech-platform-mintoak-enabling-banks-to-digitally-empower-merchant-ecosystem/",
     "publishedDate": "2022-09-22",
     "domain": "indianewengland.com",
-    "topic": "Product / Platform"
+    "topic": "Product / Platform",
+    "country": "United States"
   },
   {
     "id": "m-2023-02-21-paypal-newsroom",
@@ -635,7 +687,8 @@ const MENTIONS_SEED = [
     "url": "https://newsroom.paypal-corp.com/2023-02-21-PayPal-Ventures-Leads-Mintoaks-20-Million-Series-A-Funding-Round",
     "publishedDate": "2023-02-21",
     "domain": "paypal-corp.com",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "United States"
   },
   {
     "id": "m-2023-02-21-yourstory-seriesA",
@@ -647,7 +700,8 @@ const MENTIONS_SEED = [
     "url": "https://yourstory.com/2023/02/hdfc-bank-backed-fintech-startup-mintoak-raises-series-a-funding-paypal-ventures",
     "publishedDate": "2023-02-21",
     "domain": "yourstory.com",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "India"
   },
   {
     "id": "m-2023-02-21-entrackr-seriesA",
@@ -659,7 +713,8 @@ const MENTIONS_SEED = [
     "url": "https://entrackr.com/2023/02/mintoak-raises-20-mn-in-series-a-led-by-paypal-ventures/",
     "publishedDate": "2023-02-21",
     "domain": "entrackr.com",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "India"
   },
   {
     "id": "m-2023-02-21-epi-seriesA",
@@ -671,7 +726,8 @@ const MENTIONS_SEED = [
     "url": "https://www.electronicpaymentsinternational.com/news/indian-payments-platform-mintoak/",
     "publishedDate": "2023-02-21",
     "domain": "electronicpaymentsinternational.com",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "United Kingdom"
   },
   {
     "id": "m-2023-02-21-indianstartupnews-seriesA",
@@ -683,7 +739,8 @@ const MENTIONS_SEED = [
     "url": "https://indianstartupnews.com/news/fintech-startup-mintoak-raises-20m-in-a-series-a-round-led-by-paypal-ventures/",
     "publishedDate": "2023-02-21",
     "domain": "indianstartupnews.com",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "India"
   },
   {
     "id": "m-2022-12-14-hdfc775-businesstoday",
@@ -695,7 +752,8 @@ const MENTIONS_SEED = [
     "url": "https://www.businesstoday.in/latest/corporate/story/hdfc-bank-picks-775-stake-in-fintech-start-up-mintoak-for-rs-31-crore-356298-2022-12-14",
     "publishedDate": "2022-12-14",
     "domain": "businesstoday.in",
-    "topic": "Bank / Network Partnership"
+    "topic": "Bank / Network Partnership",
+    "country": "India"
   },
   {
     "id": "m-2026-08-04-icc-fiinews",
@@ -707,7 +765,8 @@ const MENTIONS_SEED = [
     "url": "https://www.fiinews.com/2026/08/04/market-mintoak-acquires-dubais-icc-loyalty/",
     "publishedDate": "2026-08-04",
     "domain": "fiinews.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "India"
   },
   {
     "id": "m-2026-08-04-icc-techtrendske",
@@ -719,7 +778,8 @@ const MENTIONS_SEED = [
     "url": "https://techtrendske.co.ke/2026/08/04/mintoak-acquires-icc-loyalty/",
     "publishedDate": "2026-08-04",
     "domain": "techtrendske.co.ke",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "Kenya"
   },
   {
     "id": "m-2026-08-04-icc-indiasnews",
@@ -731,7 +791,8 @@ const MENTIONS_SEED = [
     "url": "https://www.indiasnews.net/news/279221724/mintoak-acquires-middle-east-headquartered-fintech-icc-loyalty",
     "publishedDate": "2026-08-04",
     "domain": "indiasnews.net",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "India"
   },
   {
     "id": "m-2025-01-axis-ibsi",
@@ -743,7 +804,8 @@ const MENTIONS_SEED = [
     "url": "https://ibsintelligence.com/ibsi-news/mintoak-axis-bank-to-simplify-merchant-payments-and-business-solutions/",
     "publishedDate": "2025-01-22",
     "domain": "ibsintelligence.com",
-    "topic": "Bank / Network Partnership"
+    "topic": "Bank / Network Partnership",
+    "country": "United Kingdom"
   },
   {
     "id": "m-2025-01-axis-marcamoney",
@@ -755,7 +817,8 @@ const MENTIONS_SEED = [
     "url": "https://www.marcamoney.com/mintoak-partners-with-axis-bank-to-offer-smes-merchant-payment-solutions/",
     "publishedDate": "2025-01-22",
     "domain": "marcamoney.com",
-    "topic": "Bank / Network Partnership"
+    "topic": "Bank / Network Partnership",
+    "country": "India"
   },
   {
     "id": "m-2025-01-axis-apnnews",
@@ -767,7 +830,8 @@ const MENTIONS_SEED = [
     "url": "https://www.apnnews.com/mintoak-announces-partnership-with-axis-bank-to-enable-smes-with-merchant-payments-and-business-solutions/",
     "publishedDate": "2025-01-22",
     "domain": "apnnews.com",
-    "topic": "Bank / Network Partnership"
+    "topic": "Bank / Network Partnership",
+    "country": "India"
   },
   {
     "id": "m-2025-01-axis-passionateinmarketing",
@@ -779,7 +843,8 @@ const MENTIONS_SEED = [
     "url": "https://www.passionateinmarketing.com/mintoak-announces-partnership-with-axis-bank-to-enable-smes-with-merchant-payments-and-business-solutions/",
     "publishedDate": "2025-01-22",
     "domain": "passionateinmarketing.com",
-    "topic": "Bank / Network Partnership"
+    "topic": "Bank / Network Partnership",
+    "country": "India"
   },
   {
     "id": "m-2025-12-26-funding2500cr-ipocentral",
@@ -791,7 +856,8 @@ const MENTIONS_SEED = [
     "url": "https://ipocentral.in/mintoak-series-a-funding/",
     "publishedDate": "2025-12-26",
     "domain": "ipocentral.in",
-    "topic": "Funding"
+    "topic": "Funding",
+    "country": "India"
   },
   {
     "id": "m-2026-08-04-icc-shopifreaks",
@@ -803,7 +869,8 @@ const MENTIONS_SEED = [
     "url": "https://www.shopifreaks.com/mintoak-acquires-dubai-based-icc-loyalty-to-add-card-rewards-and-issuing-side-tools-to-its-merchant-payments-platform-for-banks/",
     "publishedDate": "2026-08-04",
     "domain": "shopifreaks.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "United States"
   },
   {
     "id": "m-2026-08-04-icc-businessdayng",
@@ -815,7 +882,8 @@ const MENTIONS_SEED = [
     "url": "https://businessday.ng/technology/article/mintoak-acquires-dubai-based-icc-loyalty-to-expand-payments-customer-engagement-business/",
     "publishedDate": "2026-08-04",
     "domain": "businessday.ng",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "Nigeria"
   },
   {
     "id": "m-2026-08-04-icc-malaysianreserve",
@@ -827,7 +895,8 @@ const MENTIONS_SEED = [
     "url": "https://themalaysianreserve.com/2026/08/04/mintoak-acquires-middle-east-headquartered-fintech-icc-loyalty/amp/",
     "publishedDate": "2026-08-04",
     "domain": "themalaysianreserve.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "Malaysia"
   },
   {
     "id": "m-2026-08-04-icc-zawya",
@@ -839,7 +908,8 @@ const MENTIONS_SEED = [
     "url": "https://www.zawya.com/en/press-release/africa-press-releases/mintoak-acquires-middle-east-headquartered-fintech-icc-loyalty-419833",
     "publishedDate": "2026-08-04",
     "domain": "zawya.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "United Arab Emirates"
   },
   {
     "id": "m-2026-08-04-icc-jawlah",
@@ -851,7 +921,8 @@ const MENTIONS_SEED = [
     "url": "https://jawlah.co/en/61760",
     "publishedDate": "2026-08-04",
     "domain": "jawlah.co",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "Saudi Arabia"
   },
   {
     "id": "m-2026-08-04-icc-ceoinsightsasia",
@@ -863,7 +934,8 @@ const MENTIONS_SEED = [
     "url": "https://www.ceoinsightsasia.com/news/mintoak-acquires-middle-eastbased-fintech-icc-loyalty-nwid-14777.html",
     "publishedDate": "2026-08-04",
     "domain": "ceoinsightsasia.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "Singapore"
   },
   {
     "id": "m-2026-08-04-icc-adgullyme",
@@ -875,7 +947,8 @@ const MENTIONS_SEED = [
     "url": "https://adgully.me/post/15549/mintoak-acquires-middle-east-headquartered-fintech-icc-loyalty",
     "publishedDate": "2026-08-04",
     "domain": "adgully.me",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "United Arab Emirates"
   },
   {
     "id": "m-2026-08-04-icc-yahoofinance-nz",
@@ -887,7 +960,8 @@ const MENTIONS_SEED = [
     "url": "https://nz.finance.yahoo.com/news/mintoak-acquires-middle-east-headquartered-043000837.html",
     "publishedDate": "2026-08-04",
     "domain": "finance.yahoo.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "United States"
   },
   {
     "id": "m-2026-08-04-icc-vftt",
@@ -899,7 +973,8 @@ const MENTIONS_SEED = [
     "url": "https://www.vftt.co.za/post/mintoak-acquires-middle-east-headquartered-fintech-icc-loyalty",
     "publishedDate": "2026-08-04",
     "domain": "vftt.co.za",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "South Africa"
   },
   {
     "id": "m-2026-08-04-icc-entarabi",
@@ -911,7 +986,8 @@ const MENTIONS_SEED = [
     "url": "https://entarabi.com/en/2026/08/mintoak-acquires-dubai-based-icc-loyalty-to-expand-banking-engagement-platform/",
     "publishedDate": "2026-08-04",
     "domain": "entarabi.com",
-    "topic": "M&A / Acquisition"
+    "topic": "M&A / Acquisition",
+    "country": "Saudi Arabia"
   }
 ];
 const SOCIAL_SEED = {

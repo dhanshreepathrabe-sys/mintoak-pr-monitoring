@@ -14,8 +14,8 @@ npm run start   # rebuilds the data bundle and serves the app at http://localhos
 
 | Tab | What it shows |
 |---|---|
-| **Overview** | Total Mentions, Share of Voice, Net Sentiment Score, Reach/Impressions; mentions-over-time line chart; mention volume by platform; top trending keywords; an auto-generated, topic-grouped summary feed. |
-| **Live Mentions** | Every news/press/blog mention, with source, author, headline, snippet, date, reach, PR Value, and sentiment tag. Search, source-type filter, and sort by newest/reach/PR Value. |
+| **Overview** | Total Mentions, Share of Voice, Net Sentiment Score, Reach/Impressions, Total PR Value; mentions-over-time line chart; mention volume by platform; mentions by country and by region; top trending keywords; an auto-generated, topic-grouped summary feed. |
+| **Live Mentions** | Every news/press/blog mention, with source, country, author, headline, snippet, date, reach, PR Value, and sentiment tag. Search, source-type filter, region filter, and sort by newest/reach/PR Value; a "Showing X of Y" line makes the filtered vs. total count explicit. |
 | **Social Listings** | Cross-platform social post feed (X, LinkedIn, YouTube, Reddit, Instagram, Facebook) with author-tier filtering. Real posts found via web search — see **Data honesty** below for what that does and doesn't get you. |
 | **Sentiment Analysis** | Sentiment distribution donut, sentiment trend line, aspect-based breakdown (Product, Customer Service, Leadership, Bank Integrations), and a Risk & Alerts panel for high-reach negative mentions. |
 
@@ -212,6 +212,26 @@ Meltwater, Muck Rack). Swap `computePRValue()` for a call to one of those
 when real ad-equivalency data is available; nothing downstream needs to
 change beyond that one function, same as `estimateReach()`.
 
+## Geography
+
+Every mention carries a `country` field — the reporting **outlet's home
+country/HQ**, not the story's subject matter (an India-based outlet
+covering a UAE acquisition is still counted under India). It's added by
+`scripts/add-geography.mjs`, a one-time enrichment script whose
+`DOMAIN_COUNTRY` map is the source of truth — extend it there (and the
+mirrored `REGION_BY_COUNTRY` map in `js/data.js`) when a new outlet's
+domain is added to `data/mentions.seed.json`, then re-run
+`node scripts/add-geography.mjs` and rebuild.
+
+`getGeographyDistribution()` in `js/data.js` groups mentions two ways:
+by raw country (the Overview "Mentions by country" bar chart) and by a
+seven-region bucketing — India, Middle East, Africa, Southeast Asia,
+North America, Europe, Oceania (the "Mentions by region" panel, and the
+region filter on Live Mentions). As of this dataset that's 47 distinct
+stories across 12 countries and 6 regions, dominated by India (where
+Mintoak is headquartered and most of its press coverage originates) —
+see the Overview tab for the live current breakdown.
+
 ## Link verification
 
 Because a browser tab cannot read the real HTTP status of a cross-origin
@@ -297,6 +317,7 @@ data/social.seed.json        Real, web-search-discovered social posts (see Data 
 scripts/build-data.mjs       Bakes data/*.json into js/data.generated.js
 scripts/verify-links.mjs     Authoritative HTTP status check (needs real egress)
 scripts/build-artifact.mjs   Bundles the whole app into one self-contained HTML file for the published Artifact
+scripts/add-geography.mjs    One-time enrichment: adds outlet-domain → country to data/mentions.seed.json
 vendor/                      Locally vendored Chart.js 4.5.1 + jsPDF 4.2.1 (no CDN dependency)
 ```
 

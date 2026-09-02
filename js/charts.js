@@ -52,6 +52,34 @@ function renderMentionsOverTime(canvasId, series) {
   });
 }
 
+function renderGeographyVolume(canvasId, data) {
+  destroyIfExists(canvasId);
+  const c = themeColors();
+  const ctx = document.getElementById(canvasId).getContext("2d");
+  CHART_REGISTRY[canvasId] = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: data.map((d) => d.label),
+      datasets: [{
+        data: data.map((d) => d.count),
+        backgroundColor: c.mintDeep,
+        borderRadius: 6,
+        maxBarThickness: 22
+      }]
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { beginAtZero: true, ticks: { color: c.text, precision: 0 }, grid: { color: c.grid } },
+        y: { ticks: { color: c.text }, grid: { display: false } }
+      }
+    }
+  });
+}
+
 function renderPlatformVolume(canvasId, data) {
   destroyIfExists(canvasId);
   const c = themeColors();

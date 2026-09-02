@@ -10,6 +10,54 @@
 
 const SOURCE_TYPE_WEIGHT = { News: 1, "Press Release": 0.85, Blog: 0.6, Forum: 0.4 };
 
+/**
+ * Region grouping for the geography chart, keyed by the outlet's home
+ * country (added to each mention by scripts/add-geography.mjs — HQ of the
+ * publication, not the story's subject matter). Extend both this map and
+ * DOMAIN_COUNTRY in that script together when a new country's outlet is added.
+ */
+const REGION_BY_COUNTRY = {
+  India: "India",
+  "United Arab Emirates": "Middle East",
+  "Saudi Arabia": "Middle East",
+  Nigeria: "Africa",
+  Kenya: "Africa",
+  "South Africa": "Africa",
+  Philippines: "Southeast Asia",
+  Malaysia: "Southeast Asia",
+  Singapore: "Southeast Asia",
+  "United States": "North America",
+  "United Kingdom": "Europe",
+  Netherlands: "Europe",
+  Australia: "Oceania"
+};
+
+function getRegionForCountry(country) {
+  return REGION_BY_COUNTRY[country] || "Other";
+}
+
+/** Mention counts grouped by country and by region, sorted descending. */
+function getGeographyDistribution(mentions) {
+  const byCountry = new Map();
+  mentions.forEach((m) => {
+    const country = m.country || "Unknown";
+    byCountry.set(country, (byCountry.get(country) || 0) + 1);
+  });
+
+  const byRegion = new Map();
+  byCountry.forEach((count, country) => {
+    const region = getRegionForCountry(country);
+    byRegion.set(region, (byRegion.get(region) || 0) + count);
+  });
+
+  const sortDesc = (map) =>
+    Array.from(map.entries())
+      .map(([label, count]) => ({ label, count }))
+      .sort((a, b) => b.count - a.count);
+
+  return { byCountry: sortDesc(byCountry), byRegion: sortDesc(byRegion) };
+}
+
 function hashToUnit(str) {
   let h = 0;
   for (let i = 0; i < str.length; i++) {

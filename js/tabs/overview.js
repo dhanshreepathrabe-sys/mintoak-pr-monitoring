@@ -73,6 +73,18 @@ function renderOverviewTab(state) {
   const platformVolume = buildPlatformVolume(mentions, socialPosts);
   renderPlatformVolume("chart-platform-volume", platformVolume);
 
+  const geo = getGeographyDistribution(mentions);
+  const countryWrap = document.getElementById("geo-country-chart-wrap");
+  if (geo.byCountry.length) {
+    countryWrap.style.display = "";
+    renderGeographyVolume("chart-geo-country", geo.byCountry);
+  } else {
+    countryWrap.style.display = "none";
+  }
+  document.getElementById("geo-region-rows").innerHTML = geo.byRegion.length
+    ? geo.byRegion.map((r) => geoRegionRowHtml(r, mentions.length)).join("")
+    : `<div class="empty-state">No mentions in this range.</div>`;
+
   const keywords = extractTopKeywords(mentions);
   document.getElementById("keyword-tagbar").innerHTML = keywords.length
     ? keywords.map((k) => `<span class="tag-chip">${escapeHtml(k.word)} · ${k.count}</span>`).join("")
@@ -82,6 +94,19 @@ function renderOverviewTab(state) {
   document.getElementById("summary-feed").innerHTML = bullets
     .map((b) => `<li><span class="bullet"></span><span>${escapeHtml(b)}</span></li>`)
     .join("");
+}
+
+function geoRegionRowHtml(region, total) {
+  const pct = total ? Math.round((region.count / total) * 100) : 0;
+  return `
+    <div class="aspect-row">
+      <div style="font-size:12.5px; font-weight:600;">${escapeHtml(region.label)}</div>
+      <div class="aspect-bar-track">
+        <div class="aspect-bar-seg positive" style="width:${pct}%"></div>
+      </div>
+      <div style="font-size:11.5px; color:var(--text-muted); text-align:right;">${region.count} · ${pct}%</div>
+    </div>
+  `;
 }
 
 function metricCardHtml(label, value, delta) {

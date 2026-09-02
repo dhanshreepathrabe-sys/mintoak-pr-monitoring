@@ -43,9 +43,9 @@ function downloadBlob(content, filename, mime) {
 }
 
 async function exportMentionsCsv(mentions) {
-  const headers = ["Source", "Source Type", "Author", "Headline", "Published Date", "Sentiment", "Sentiment Confidence %", "Reach", "PR Value (INR)", "Domain", "URL"];
+  const headers = ["Source", "Source Type", "Country", "Region", "Author", "Headline", "Published Date", "Sentiment", "Sentiment Confidence %", "Reach", "PR Value (INR)", "Domain", "URL"];
   const rows = mentions.map((m) => [
-    m.source, m.sourceType, m.author, m.headline, m.publishedDate, m.sentiment, m.sentimentConfidence, m.reach, m.prValue, m.domainAuthority.host, m.url
+    m.source, m.sourceType, m.country, getRegionForCountry(m.country), m.author, m.headline, m.publishedDate, m.sentiment, m.sentimentConfidence, m.reach, m.prValue, m.domainAuthority.host, m.url
   ]);
   const csv = [headers, ...rows].map((r) => r.map(toCsvValue).join(",")).join("\n");
   await saveFile(`mintoak-mentions-${new Date().toISOString().slice(0, 10)}.csv`, csv, "text/csv;charset=utf-8;");
