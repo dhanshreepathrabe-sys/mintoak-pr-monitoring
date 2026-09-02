@@ -87,7 +87,7 @@ search tool are reachable). That shaped two decisions:
    **Social Listening API** below) became available mid-project and
    supplies real, on-demand keyword search across X, LinkedIn, YouTube and
    Reddit — with real API-returned engagement numbers where the platform
-   provides them. Of the **27 real, third-party-only posts** here, 17 came
+   provides them. Of the **32 real, third-party-only posts** here, 22 came
    from that connector (`metricsAvailable: true`, real likes/comments/
    shares, and views + a computed engagement rate where the platform
    exposes view counts) and 10 are earlier finds from public web search
@@ -111,7 +111,11 @@ search tool are reachable). That shaped two decisions:
    investor (Pravega Ventures) telling the founders' backstory, several
    independent commentators' reaction posts, the first genuinely
    Arabic-language (Jawlah) and German-language (The Analyst) posts found
-   in this dataset, a Kenyan fintech analyst's take, and — deliberately
+   in this dataset, a Kenyan fintech analyst's take, the first
+   Bangladesh-specific mention (an independent commentator citing the real
+   Visa-Mintoak partnership in a regional investment-climate post), two
+   journalist tweets scooping the ICC Loyalty deal and a funding round
+   months before their official announcements, and — deliberately
    included rather than filtered out — one critical/governance-scrutiny
    post about an HDFC Bank executive's early personal investment in
    Mintoak, so this feed isn't just the positive coverage. Still thin on
@@ -286,10 +290,11 @@ What it is **not**: a standing, continuously-running monitor. Every call
 is a one-shot keyword query against whatever the platform's own search
 currently surfaces — the tool's own documentation is explicit that
 "results may be incomplete" and disclaims "continuous monitoring...
-complete platform coverage." Running it once, as this project has so far,
-finds a snapshot of currently-discoverable posts, not a full historical
-archive — that's why Social Listings jumped from 9 to 27 records in one
-session rather than to 1,210+ (see **On "1210+ social listings"** above).
+complete platform coverage." Running it manually a few times, as this
+project has so far, finds a snapshot of currently-discoverable posts, not
+a full historical archive — that's why Social Listings jumped from 9 to
+32 records across two sessions rather than to 1,210+ (see **On "1210+
+social listings"** above).
 
 Every result is still run through the same honesty gate as before adding
 anything: Mintoak's own official pages/channels are filtered out by
