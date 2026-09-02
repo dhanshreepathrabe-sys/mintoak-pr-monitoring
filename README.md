@@ -30,8 +30,8 @@ egress** (outbound HTTP to arbitrary domains — news sites, social APIs — is
 blocked by network policy; only package registries and Anthropic's own
 search tool are reachable). That shaped two decisions:
 
-1. **`data/mentions.seed.json`** — 76 real Mintoak media mentions (47
-   distinct stories after dedup), sourced via web search across roughly 55
+1. **`data/mentions.seed.json`** — 77 real Mintoak media mentions (48
+   distinct stories after dedup), sourced via web search across roughly 56
    outlets — including regional press on five continents: Nigeria
    (Businessday NG), Malaysia (The Malaysian Reserve), South Africa (Zawya,
    VFTT), Saudi Arabia (Jawlah, entARABI), Singapore (CEO Insights Asia),
@@ -64,7 +64,15 @@ search tool are reachable). That shaped two decisions:
    Google Drive file discussed below, none independently confirmed), and
    South Korean/Egyptian coverage of the ICC Loyalty deal — not included
    because nothing real turned up,
-   not because the search wasn't tried. URLs are real and were returned by
+   not because the search wasn't tried. The most recent addition, Indian
+   Startup Times' "India's Fintech Power List: 50 Leaders to Watch in
+   2026" feature on CEO Raman Khanduja, didn't have a stated publish date
+   in search results, so its `2026-01-20` date was derived from decoding
+   three separate LinkedIn posts announcing the list (Snowflake-style IDs
+   whose high bits are a literal Unix ms timestamp via `id >> 22`) — all
+   three independently decoded to within 32 minutes of each other, which
+   is stronger corroboration than a single unverified date claim would
+   be. URLs are real and were returned by
    web search, but this
    sandbox could not perform the live HTTP status check itself (see **Link
    verification** below) — run `npm run verify:links` from a machine with
@@ -74,8 +82,9 @@ search tool are reachable). That shaped two decisions:
    platform API** (checked: none of the connected marketing tools —
    Supermetrics, Windsor.ai, Porter Metrics — have a real Mintoak social
    account authorized), so instead of fabricating engagement metrics, these
-   are **9 real, third-party-only posts found via public web search**
-   (`site:linkedin.com`, `site:youtube.com`, `site:facebook.com`, etc.)
+   are **10 real, third-party-only posts found via public web search**
+   (`site:linkedin.com`, `site:youtube.com`, `site:facebook.com`, etc.) or
+   submitted directly by the user after finding them by hand
    across LinkedIn, YouTube and Facebook — each with `metricsAvailable:
    false`, so the UI shows "Engagement data unavailable" rather than a
    made-up like/comment count. **Mintoak's own official channels (its
@@ -96,14 +105,23 @@ search tool are reachable). That shaped two decisions:
    merchant-payments platform, and no Reddit mentions were found at all.
    Every post carries its **actual publish date**: `dateConfidence:
    "exact"` when a search result stated it directly, `"estimated"` when
-   it's a well-reasoned estimate anchored to the news event the post is
-   visibly reacting to (the platform's own timestamp wasn't visible in
-   search results) — shown in the UI with a `~` prefix and an explanatory
-   hover, never a crawl/discovery date. A `WEB SEARCH` badge marks every
-   record as web-search-sourced rather than API-sourced.
+   it's a well-reasoned estimate — either anchored to the news event the
+   post is visibly reacting to, or (for LinkedIn/X) decoded from the
+   post's own numeric ID: both platforms use Snowflake-style IDs whose
+   high bits are a literal Unix millisecond timestamp, recoverable as
+   `id >> 22`. That's how the Jajabor Brand Consultancy post
+   (`s-li-jajabor-fintech-comms`) got its `2026-08-06` date — LinkedIn
+   itself was unreachable (blocked for automated fetch in this
+   environment) to confirm the post's text, so only what's independently
+   checkable (the URL is real, the ID decodes to a date matching the ICC
+   Loyalty PR wave Jajabor — Mintoak's own PR agency — was running) is
+   recorded; the exact wording is not asserted. Shown in the UI with a
+   `~` prefix and an explanatory hover, never a crawl/discovery date. A
+   `WEB SEARCH` badge marks every record as web-search-sourced rather
+   than API-sourced.
 
 **On "1210+ social listings and 50+ mentions"**: 50+ real mentions turned
-out to be findable — the 76 raw / 47 distinct here clear it. 1210+ social
+out to be findable — the 77 raw / 48 distinct here clear it. 1210+ social
 listings did not, and realistically can't via web search: individual
 posts on X, Instagram and (mostly) LinkedIn aren't search-engine-indexed
 at the level of a specific status update — search surfaces a company's
@@ -227,7 +245,7 @@ domain is added to `data/mentions.seed.json`, then re-run
 by raw country (the Overview "Mentions by country" bar chart) and by a
 seven-region bucketing — India, Middle East, Africa, Southeast Asia,
 North America, Europe, Oceania (the "Mentions by region" panel, and the
-region filter on Live Mentions). As of this dataset that's 47 distinct
+region filter on Live Mentions). As of this dataset that's 48 distinct
 stories across 12 countries and 6 regions, dominated by India (where
 Mintoak is headquartered and most of its press coverage originates) —
 see the Overview tab for the live current breakdown.

@@ -561,6 +561,19 @@ const MENTIONS_SEED = [
     "country": "India"
   },
   {
+    "id": "m-2026-01-20-fintech-power-list-indianstartuptimes",
+    "source": "Indian Startup Times",
+    "sourceType": "News",
+    "author": "Indian Startup Times Desk",
+    "headline": "India's Fintech Power List: 50 Leaders to Watch in 2026 — featuring Raman Khanduja",
+    "snippet": "Editorially curated list of 50 leaders shaping India's fintech evolution into full-stack financial infrastructure; Raman Khanduja (Mintoak Co-founder & CEO) is featured, credited with scaling Mintoak to 4 million+ merchants across six countries.",
+    "url": "https://www.indianstartuptimes.com/awards/indias-fintech-power-list-50-leaders-to-watch-in-2026-2/",
+    "publishedDate": "2026-01-20",
+    "domain": "indianstartuptimes.com",
+    "topic": "Leadership / Awards",
+    "country": "India"
+  },
+  {
     "id": "m-2026-08-04-icc-gccbusinessnews",
     "source": "GCC Business News",
     "sourceType": "News",
@@ -1094,6 +1107,19 @@ const SOCIAL_SEED = {
       "postText": "\"Mumbai-based fintech Mintoak has acquired Dubai-headquartered ICC Loyalty, adding loyalty and rewards technology to its banking platform...\" — YourStory's own Facebook post sharing its ICC Loyalty coverage.",
       "url": "https://www.facebook.com/yourstorycom/posts/mumbai-based-fintech-mintoak-has-acquired-dubai-headquartered-icc-loyalty-adding/1538399168322052/",
       "publishedDate": "2026-08-04",
+      "dateConfidence": "estimated",
+      "metricsAvailable": false
+    },
+    {
+      "id": "s-li-jajabor-fintech-comms",
+      "platform": "LinkedIn",
+      "authorName": "Jajabor Brand Consultancy",
+      "authorHandle": "jajaborbrandconsultancy",
+      "authorTier": "Industry Leader",
+      "verified": false,
+      "postText": "Post by Jajabor Brand Consultancy — Mintoak's PR agency of record for corporate communications (Jajabor led PR for Mintoak's ICC Loyalty acquisition announcement) — tagged #fintech #corporatecommunications. User-submitted link; exact post text isn't independently checkable here (LinkedIn is blocked for automated fetch in this environment), so only the confirmed metadata is recorded.",
+      "url": "https://www.linkedin.com/posts/jajaborbrandconsultancy-fintech-corporatecommunications-ugcPost-7491004047555227648-HQ0T/",
+      "publishedDate": "2026-08-06",
       "dateConfidence": "estimated",
       "metricsAvailable": false
     },
