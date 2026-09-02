@@ -27,16 +27,57 @@ function estimateReach(item) {
   return Math.round(base * typeWeight * jitter);
 }
 
+/**
+ * PR Value: an illustrative Earned Media Value (EMV) estimate in INR, built
+ * entirely from numbers already on the mention (reach, domain authority,
+ * source type, sentiment, syndication count) via one documented formula —
+ * see README > "PR Value methodology" for the full writeup and worked
+ * example. This is deliberately NOT the kind of number found in
+ * Mintoak_PR_Coverage_2026-08-11.xlsx (a spreadsheet in the connected
+ * Google Drive whose per-row "PR Value" figures turned out to be
+ * AI-fabricated, with no stated method and no relationship to the reach
+ * numbers next to them — see the conversation this was flagged in). Every
+ * factor here is inspectable in this file; there is no hidden constant and
+ * no invented one-off number. Treat the output as a directional estimate
+ * for comparing mentions against each other, not an audited or
+ * industry-benchmarked AVE figure — a real one needs an actual ad-rate
+ * card or a licensed provider (Cision, Meltwater, Muck Rack), which this
+ * project doesn't have access to.
+ */
+const PR_VALUE_INR_PER_REACH_POINT = 0.02; // illustrative AVE-style rate; see docstring above
+const PR_VALUE_SENTIMENT_MULTIPLIER = { Positive: 1.15, Neutral: 1.0, Negative: 0.5 };
+const PR_VALUE_SYNDICATION_BONUS_PER_OUTLET = 0.1; // each additional syndicated outlet adds 10% of base value
+
+function computePRValue(item, reach, sentimentLabel) {
+  const authority = getDomainAuthority(item.url);
+  const authorityMultiplier = authority.trusted ? 1.0 : 0.5;
+  const sentimentMultiplier = PR_VALUE_SENTIMENT_MULTIPLIER[sentimentLabel] ?? 1.0;
+  const syndicationMultiplier = 1 + PR_VALUE_SYNDICATION_BONUS_PER_OUTLET * (item.syndicatedCount || 0);
+  return Math.round(reach * PR_VALUE_INR_PER_REACH_POINT * authorityMultiplier * sentimentMultiplier * syndicationMultiplier);
+}
+
+/** Indian numbering (Lakh = 1,00,000; Crore = 1,00,00,000), matching Mintoak's ₹ formatting convention. */
+function formatINR(amount) {
+  const sign = amount < 0 ? "-" : "";
+  const abs = Math.abs(amount);
+  if (abs >= 10000000) return `${sign}₹${(abs / 10000000).toFixed(2)} Cr`;
+  if (abs >= 100000) return `${sign}₹${(abs / 100000).toFixed(2)} L`;
+  if (abs >= 1000) return `${sign}₹${(abs / 1000).toFixed(1)}K`;
+  return `${sign}₹${Math.round(abs)}`;
+}
+
 function enrichMention(raw) {
   const sentiment = scoreSentiment(`${raw.headline} ${raw.snippet}`);
   const authority = getDomainAuthority(raw.url);
   const cleanUrl = scrubUrl(raw.url);
+  const reach = estimateReach(raw);
   return {
     ...raw,
     url: cleanUrl,
     sentiment: sentiment.label,
     sentimentConfidence: sentiment.confidence,
-    reach: estimateReach(raw),
+    reach,
+    prValue: computePRValue(raw, reach, sentiment.label),
     domainAuthority: authority,
     https: isHttps(cleanUrl),
     aspects: classifyAspects(`${raw.headline} ${raw.snippet}`),

@@ -22,6 +22,7 @@ function renderLiveMentionsControls() {
       <select id="lm-sort" class="filter-select">
         <option value="newest" ${liveMentionsUiState.sort === "newest" ? "selected" : ""}>Newest first</option>
         <option value="reach" ${liveMentionsUiState.sort === "reach" ? "selected" : ""}>Impact / Reach</option>
+        <option value="prvalue" ${liveMentionsUiState.sort === "prvalue" ? "selected" : ""}>PR Value</option>
       </select>
       <button id="lm-export-csv" class="pill-btn">Export CSV</button>
     </div>
@@ -40,11 +41,11 @@ function filterAndSortMentions(mentions) {
     const wanted = liveMentionsUiState.sourceType === "Blogs" ? "Blog" : liveMentionsUiState.sourceType;
     out = out.filter((m) => m.sourceType === wanted);
   }
-  out = [...out].sort((a, b) =>
-    liveMentionsUiState.sort === "reach"
-      ? b.reach - a.reach
-      : new Date(b.publishedDate) - new Date(a.publishedDate)
-  );
+  out = [...out].sort((a, b) => {
+    if (liveMentionsUiState.sort === "reach") return b.reach - a.reach;
+    if (liveMentionsUiState.sort === "prvalue") return b.prValue - a.prValue;
+    return new Date(b.publishedDate) - new Date(a.publishedDate);
+  });
   return out;
 }
 
@@ -73,6 +74,8 @@ function mentionCardHtml(m) {
         <span>${new Date(m.publishedDate).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })}</span>
         <span>·</span>
         <span>Reach ≈ ${formatReach(m.reach)}</span>
+        <span>·</span>
+        <span title="Illustrative EMV estimate — see README > PR Value methodology">PR Value ≈ ${formatINR(m.prValue)}</span>
         <span>·</span>
         ${domainBadge(m.domainAuthority)}
         ${m.https ? `<span class="badge positive">HTTPS</span>` : `<span class="badge negative">Not HTTPS</span>`}

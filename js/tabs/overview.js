@@ -54,6 +54,7 @@ function formatReach(n) {
 function renderOverviewTab(state) {
   const { mentions, socialPosts, range } = state;
   const totalReach = mentions.reduce((sum, m) => sum + m.reach, 0);
+  const totalPRValue = mentions.reduce((sum, m) => sum + m.prValue, 0);
   const sentimentCounts = aggregateSentiment(mentions, (m) => `${m.headline} ${m.snippet}`);
   const netSentiment = computeNetSentimentScore(sentimentCounts);
   const sov = computeShareOfVoice(mentions.length);
@@ -63,6 +64,7 @@ function renderOverviewTab(state) {
     ${metricCardHtml("Share of Voice", `${sov}%`, "vs. tracked competitors, illustrative")}
     ${metricCardHtml("Net Sentiment Score", netSentiment > 0 ? `+${netSentiment}` : netSentiment, `${sentimentCounts.Positive} pos / ${sentimentCounts.Neutral} neu / ${sentimentCounts.Negative} neg`)}
     ${metricCardHtml("Reach / Impressions", formatReach(totalReach), "estimated, see methodology in README")}
+    ${metricCardHtml("Total PR Value", formatINR(totalPRValue), "illustrative EMV, see methodology in README")}
   `;
 
   const series = buildDailySeries(mentions, range.start, range.end);

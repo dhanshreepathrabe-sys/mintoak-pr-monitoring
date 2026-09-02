@@ -15,7 +15,7 @@ npm run start   # rebuilds the data bundle and serves the app at http://localhos
 | Tab | What it shows |
 |---|---|
 | **Overview** | Total Mentions, Share of Voice, Net Sentiment Score, Reach/Impressions; mentions-over-time line chart; mention volume by platform; top trending keywords; an auto-generated, topic-grouped summary feed. |
-| **Live Mentions** | Every news/press/blog mention, with source, author, headline, snippet, date, reach, and sentiment tag. Search, source-type filter, and sort by newest/reach. |
+| **Live Mentions** | Every news/press/blog mention, with source, author, headline, snippet, date, reach, PR Value, and sentiment tag. Search, source-type filter, and sort by newest/reach/PR Value. |
 | **Social Listings** | Cross-platform social post feed (X, LinkedIn, YouTube, Reddit, Instagram, Facebook) with author-tier filtering. Real posts found via web search — see **Data honesty** below for what that does and doesn't get you. |
 | **Sentiment Analysis** | Sentiment distribution donut, sentiment trend line, aspect-based breakdown (Product, Customer Service, Leadership, Bank Integrations), and a Risk & Alerts panel for high-reach negative mentions. |
 
@@ -30,16 +30,20 @@ egress** (outbound HTTP to arbitrary domains — news sites, social APIs — is
 blocked by network policy; only package registries and Anthropic's own
 search tool are reachable). That shaped two decisions:
 
-1. **`data/mentions.seed.json`** — 67 real Mintoak media mentions (45
-   distinct stories after dedup), sourced via web search across roughly 45
-   outlets: Business Standard, Inc42, Entrackr, PR Newswire (US/UK), The
-   Paypers, TradingView, Manila Times, CXOToday, FinTech Magazine, FinTech
-   Futures, YourStory, Entrepreneur India, Adgully, IndiaInfoline, AOL, IBS
-   Intelligence, Mediabrief, Analytics Insight, The Tribune, Indian Startup
-   News, SiliconIndia, Elets BFSI, ANI, LatestLY, GCC Business News, Outlook
-   Business, Business Today, Siasat Daily, India New England News, Finance
-   Outlook India, IPO Central, Startup Story, Indian Startup Times,
-   TheIndiaBizz, Startup News FYI, Investing.com/IANS, Marca Money, APN
+1. **`data/mentions.seed.json`** — 72 real Mintoak media mentions (47
+   distinct stories after dedup), sourced via web search across roughly 50
+   outlets — including regional press well beyond India: Nigeria
+   (Businessday NG), Malaysia (The Malaysian Reserve), Africa (Zawya, GCC
+   Business News), Saudi Arabia (Jawlah), Singapore (CEO Insights Asia),
+   Kenya (TechTrends Kenya) — alongside Business Standard, Inc42, Entrackr,
+   PR Newswire (US/UK), The Paypers, TradingView, Manila Times, CXOToday,
+   FinTech Magazine, FinTech Futures, YourStory, Entrepreneur India,
+   Adgully, IndiaInfoline, AOL, IBS Intelligence, Mediabrief, Analytics
+   Insight, The Tribune, Indian Startup News, SiliconIndia, Elets BFSI,
+   ANI, LatestLY, Outlook Business, Business Today, Siasat Daily, India New
+   England News, Finance Outlook India, IPO Central, Startup Story, Indian
+   Startup Times, TheIndiaBizz, Startup News FYI, Investing.com/IANS, Marca
+   Money, APN
    News, Passionate In Marketing, Shopifreaks, Axis Bank's own newsroom,
    and PayPal's own newsroom. Covers the ICC Loyalty acquisition (including
    Entrackr's early scoop months before the official announcement, and the
@@ -50,7 +54,11 @@ search tool are reachable). That shaped two decisions:
    and Dec-2022 HDFC stakes, the Feb-2023 $20M PayPal-led Series A, the
    Jan-2025 Z3Partners secondary, and the Dec-2025 Series A extension at a
    $280M valuation), and several leadership profiles/interviews of CEO
-   Raman Khanduja. URLs are real and were returned by web search, but this
+   Raman Khanduja. Also checked and came up genuinely empty: Hindi-language
+   press (searched directly in Hindi), and South Korean/Egyptian coverage
+   of the ICC Loyalty deal — not included because nothing real turned up,
+   not because the search wasn't tried. URLs are real and were returned by
+   web search, but this
    sandbox could not perform the live HTTP status check itself (see **Link
    verification** below) — run `npm run verify:links` from a machine with
    normal internet access before trusting the "Link status" badge in
@@ -88,7 +96,7 @@ search tool are reachable). That shaped two decisions:
    record as web-search-sourced rather than API-sourced.
 
 **On "1210+ social listings and 50+ mentions"**: 50+ real mentions turned
-out to be findable — the 67 raw / 45 distinct here clear it. 1210+ social
+out to be findable — the 72 raw / 47 distinct here clear it. 1210+ social
 listings did not, and realistically can't via web search: individual
 posts on X, Instagram and (mostly) LinkedIn aren't search-engine-indexed
 at the level of a specific status update — search surfaces a company's
@@ -158,6 +166,44 @@ Aspect-based sentiment (`classifyAspects()`) buckets a mention into
 Product/Platform, Customer Service, Leadership/Management, and Bank
 Integrations by keyword match, then the same lexicon scorer runs per
 aspect.
+
+## PR Value methodology
+
+Every mention shows a **PR Value** (an illustrative Earned Media Value /
+EMV estimate in INR) — the "Total PR Value" card on Overview, a "PR Value
+≈" line on each Live Mentions card, a PR Value sort option, and a column
+in the CSV export. `computePRValue()` in `js/data.js` is one small,
+fully-inspectable formula:
+
+```
+PR Value = Reach
+         × ₹0.02 per reach point                        (PR_VALUE_INR_PER_REACH_POINT)
+         × domain authority multiplier (1.0 trusted / 0.5 unrecognized)
+         × sentiment multiplier (1.15 positive / 1.0 neutral / 0.5 negative)
+         × (1 + 0.1 × syndicated-outlet count)
+```
+
+Reach itself is the same deterministic, documented estimate described
+above (domain authority × source-type weight × a stable per-item factor)
+— there's no separate hidden number here, just that same Reach run
+through one more formula. `formatINR()` renders it Indian-style (₹X.XX
+Cr / ₹X.XX L / ₹X.XK), matching Mintoak's brand convention.
+
+**Worth being direct about why this exists in this exact shape.** While
+looking at the connected Google Drive for real PR reporting (see **Data
+honesty** above), `Mintoak_PR_Coverage_2026-08-11.xlsx` turned out to
+carry a "PR Value" column with numbers that had no stated relationship to
+anything else in the row — plausible-looking ₹ figures with no visible
+method, sitting next to reach numbers that didn't correlate with them.
+This dashboard's PR Value is built the opposite way on purpose: every
+input is a field already on the mention, every multiplier is a named
+constant in `js/data.js` you can read and change, and the whole
+computation is reproducible from the formula above. It is still an
+**estimate, not an audited or industry-benchmarked AVE figure** — a real
+one needs an actual ad-rate card or a licensed provider (Cision,
+Meltwater, Muck Rack). Swap `computePRValue()` for a call to one of those
+when real ad-equivalency data is available; nothing downstream needs to
+change beyond that one function, same as `estimateReach()`.
 
 ## Link verification
 
@@ -230,7 +276,7 @@ js/filters.js                Context-disambiguation filter + date-range filter
 js/sentiment.js              Lexicon sentiment scorer + aspect classification
 js/dedupe.js                 Syndicated-content clustering/dedup
 js/linkVerify.js             URL scrubbing, domain authority, reachability probe
-js/data.js                   Runtime data layer (loads + enriches raw records)
+js/data.js                   Runtime data layer (loads + enriches raw records, incl. PR Value)
 js/data.generated.js         AUTO-GENERATED from data/*.json — do not hand-edit
 js/charts.js                 Chart.js wrappers (line/bar/donut), theme-aware
 js/export.js                 CSV + PDF export

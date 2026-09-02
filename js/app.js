@@ -116,6 +116,7 @@ function initApp() {
     const counts = aggregateSentiment(state.mentions, (m) => `${m.headline} ${m.snippet}`);
     const net = computeNetSentimentScore(counts);
     const totalReach = state.mentions.reduce((s, m) => s + m.reach, 0);
+    const totalPRValue = state.mentions.reduce((s, m) => s + m.prValue, 0);
     exportSummaryPdf(
       { rangeLabel: state.rangeLabel },
       {
@@ -123,7 +124,8 @@ function initApp() {
           { label: "Total Mentions", value: state.mentions.length },
           { label: "Share of Voice", value: `${computeShareOfVoice(state.mentions.length)}%` },
           { label: "Net Sentiment Score", value: net },
-          { label: "Reach / Impressions", value: formatReach(totalReach) }
+          { label: "Reach / Impressions", value: formatReach(totalReach) },
+          { label: "Total PR Value (illustrative EMV)", value: formatINR(totalPRValue) }
         ],
         bullets: buildSummaryBullets(state.mentions),
         mentions: state.mentions

@@ -804,6 +804,66 @@ const MENTIONS_SEED = [
     "publishedDate": "2026-08-04",
     "domain": "shopifreaks.com",
     "topic": "M&A / Acquisition"
+  },
+  {
+    "id": "m-2026-08-04-icc-businessdayng",
+    "source": "Businessday NG",
+    "sourceType": "News",
+    "author": "Businessday NG Desk",
+    "headline": "Mintoak acquires Dubai-based ICC Loyalty to expand payments, customer engagement business",
+    "snippet": "Nigerian business-press coverage of the ICC Loyalty acquisition, framing the combined business as a unified payments-and-engagement operating system for banks across emerging markets.",
+    "url": "https://businessday.ng/technology/article/mintoak-acquires-dubai-based-icc-loyalty-to-expand-payments-customer-engagement-business/",
+    "publishedDate": "2026-08-04",
+    "domain": "businessday.ng",
+    "topic": "M&A / Acquisition"
+  },
+  {
+    "id": "m-2026-08-04-icc-malaysianreserve",
+    "source": "The Malaysian Reserve",
+    "sourceType": "News",
+    "author": "The Malaysian Reserve Desk",
+    "headline": "Mintoak acquires Middle East-headquartered fintech ICC Loyalty",
+    "snippet": "Malaysian business-press coverage of the ICC Loyalty acquisition.",
+    "url": "https://themalaysianreserve.com/2026/08/04/mintoak-acquires-middle-east-headquartered-fintech-icc-loyalty/amp/",
+    "publishedDate": "2026-08-04",
+    "domain": "themalaysianreserve.com",
+    "topic": "M&A / Acquisition"
+  },
+  {
+    "id": "m-2026-08-04-icc-zawya",
+    "source": "Zawya",
+    "sourceType": "Press Release",
+    "author": "Zawya (Refinitiv/LSEG)",
+    "headline": "Mintoak acquires Middle East-headquartered fintech ICC Loyalty",
+    "snippet": "Africa press-release wire coverage of the ICC Loyalty acquisition via Zawya's Refinitiv/LSEG distribution.",
+    "url": "https://www.zawya.com/en/press-release/africa-press-releases/mintoak-acquires-middle-east-headquartered-fintech-icc-loyalty-419833",
+    "publishedDate": "2026-08-04",
+    "domain": "zawya.com",
+    "topic": "M&A / Acquisition"
+  },
+  {
+    "id": "m-2026-08-04-icc-jawlah",
+    "source": "Jawlah",
+    "sourceType": "News",
+    "author": "Jawlah Desk",
+    "headline": "Indian Mintoak acquires Emirati ICC Loyalty to expand banking engagement solutions in Middle East and Africa",
+    "snippet": "Saudi Arabian business-press coverage of the ICC Loyalty acquisition.",
+    "url": "https://jawlah.co/en/61760",
+    "publishedDate": "2026-08-04",
+    "domain": "jawlah.co",
+    "topic": "M&A / Acquisition"
+  },
+  {
+    "id": "m-2026-08-04-icc-ceoinsightsasia",
+    "source": "CEO Insights Asia",
+    "sourceType": "News",
+    "author": "CEO Insights Asia Desk",
+    "headline": "Mintoak Acquires Middle East-based Fintech ICC Loyalty",
+    "snippet": "Singapore-based business-press coverage of the ICC Loyalty acquisition.",
+    "url": "https://www.ceoinsightsasia.com/news/mintoak-acquires-middle-eastbased-fintech-icc-loyalty-nwid-14777.html",
+    "publishedDate": "2026-08-04",
+    "domain": "ceoinsightsasia.com",
+    "topic": "M&A / Acquisition"
   }
 ];
 const SOCIAL_SEED = {
