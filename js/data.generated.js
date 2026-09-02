@@ -864,6 +864,54 @@ const MENTIONS_SEED = [
     "publishedDate": "2026-08-04",
     "domain": "ceoinsightsasia.com",
     "topic": "M&A / Acquisition"
+  },
+  {
+    "id": "m-2026-08-04-icc-adgullyme",
+    "source": "Adgully Middle East",
+    "sourceType": "News",
+    "author": "Adgully Middle East Desk",
+    "headline": "Mintoak acquires Middle East-headquartered fintech ICC Loyalty",
+    "snippet": "Middle East edition of Adgully covering the ICC Loyalty acquisition.",
+    "url": "https://adgully.me/post/15549/mintoak-acquires-middle-east-headquartered-fintech-icc-loyalty",
+    "publishedDate": "2026-08-04",
+    "domain": "adgully.me",
+    "topic": "M&A / Acquisition"
+  },
+  {
+    "id": "m-2026-08-04-icc-yahoofinance-nz",
+    "source": "Yahoo Finance (NZ)",
+    "sourceType": "News",
+    "author": "PR Newswire (syndicated)",
+    "headline": "Mintoak acquires Middle East-headquartered fintech ICC Loyalty",
+    "snippet": "Yahoo Finance New Zealand syndication of the PR Newswire release on the ICC Loyalty acquisition.",
+    "url": "https://nz.finance.yahoo.com/news/mintoak-acquires-middle-east-headquartered-043000837.html",
+    "publishedDate": "2026-08-04",
+    "domain": "finance.yahoo.com",
+    "topic": "M&A / Acquisition"
+  },
+  {
+    "id": "m-2026-08-04-icc-vftt",
+    "source": "VFTT",
+    "sourceType": "News",
+    "author": "VFTT Desk",
+    "headline": "Mintoak acquires Middle East-headquartered fintech ICC Loyalty",
+    "snippet": "South African business-press coverage of the ICC Loyalty acquisition.",
+    "url": "https://www.vftt.co.za/post/mintoak-acquires-middle-east-headquartered-fintech-icc-loyalty",
+    "publishedDate": "2026-08-04",
+    "domain": "vftt.co.za",
+    "topic": "M&A / Acquisition"
+  },
+  {
+    "id": "m-2026-08-04-icc-entarabi",
+    "source": "entARABI",
+    "sourceType": "News",
+    "author": "entARABI Desk",
+    "headline": "Mintoak Acquires Dubai-Based ICC Loyalty to Expand Banking Engagement Platform",
+    "snippet": "Saudi Arabian bilingual business-press coverage of the ICC Loyalty acquisition (English edition; no separately indexed Arabic-language article was found for this outlet).",
+    "url": "https://entarabi.com/en/2026/08/mintoak-acquires-dubai-based-icc-loyalty-to-expand-banking-engagement-platform/",
+    "publishedDate": "2026-08-04",
+    "domain": "entarabi.com",
+    "topic": "M&A / Acquisition"
   }
 ];
 const SOCIAL_SEED = {

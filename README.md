@@ -30,20 +30,21 @@ egress** (outbound HTTP to arbitrary domains — news sites, social APIs — is
 blocked by network policy; only package registries and Anthropic's own
 search tool are reachable). That shaped two decisions:
 
-1. **`data/mentions.seed.json`** — 72 real Mintoak media mentions (47
-   distinct stories after dedup), sourced via web search across roughly 50
-   outlets — including regional press well beyond India: Nigeria
-   (Businessday NG), Malaysia (The Malaysian Reserve), Africa (Zawya, GCC
-   Business News), Saudi Arabia (Jawlah), Singapore (CEO Insights Asia),
-   Kenya (TechTrends Kenya) — alongside Business Standard, Inc42, Entrackr,
-   PR Newswire (US/UK), The Paypers, TradingView, Manila Times, CXOToday,
-   FinTech Magazine, FinTech Futures, YourStory, Entrepreneur India,
-   Adgully, IndiaInfoline, AOL, IBS Intelligence, Mediabrief, Analytics
-   Insight, The Tribune, Indian Startup News, SiliconIndia, Elets BFSI,
-   ANI, LatestLY, Outlook Business, Business Today, Siasat Daily, India New
-   England News, Finance Outlook India, IPO Central, Startup Story, Indian
-   Startup Times, TheIndiaBizz, Startup News FYI, Investing.com/IANS, Marca
-   Money, APN
+1. **`data/mentions.seed.json`** — 76 real Mintoak media mentions (47
+   distinct stories after dedup), sourced via web search across roughly 55
+   outlets — including regional press on five continents: Nigeria
+   (Businessday NG), Malaysia (The Malaysian Reserve), South Africa (Zawya,
+   VFTT), Saudi Arabia (Jawlah, entARABI), Singapore (CEO Insights Asia),
+   Kenya (TechTrends Kenya), the UAE (Adgully Middle East, GCC Business
+   News), and New Zealand (Yahoo Finance) — alongside Business Standard,
+   Inc42, Entrackr, PR Newswire (US/UK), The Paypers, TradingView, Manila
+   Times, CXOToday, FinTech Magazine, FinTech Futures, YourStory,
+   Entrepreneur India, Adgully, IndiaInfoline, AOL, IBS Intelligence,
+   Mediabrief, Analytics Insight, The Tribune, Indian Startup News,
+   SiliconIndia, Elets BFSI, ANI, LatestLY, Outlook Business, Business
+   Today, Siasat Daily, India New England News, Finance Outlook India, IPO
+   Central, Startup Story, Indian Startup Times, TheIndiaBizz, Startup News
+   FYI, Investing.com/IANS, Marca Money, APN
    News, Passionate In Marketing, Shopifreaks, Axis Bank's own newsroom,
    and PayPal's own newsroom. Covers the ICC Loyalty acquisition (including
    Entrackr's early scoop months before the official announcement, and the
@@ -55,8 +56,14 @@ search tool are reachable). That shaped two decisions:
    Jan-2025 Z3Partners secondary, and the Dec-2025 Series A extension at a
    $280M valuation), and several leadership profiles/interviews of CEO
    Raman Khanduja. Also checked and came up genuinely empty: Hindi-language
-   press (searched directly in Hindi), and South Korean/Egyptian coverage
-   of the ICC Loyalty deal — not included because nothing real turned up,
+   and Arabic-language press specifically (searched directly in both
+   scripts — the entARABI piece that's included is its English edition,
+   since no separately-indexed Arabic-language article for it was found),
+   Vietnamese/Thai PR Newswire pickups, Moneycontrol/NDTV/The Wire/The
+   Hindu Businessline/The Economic Times (all confidently claimed by the
+   Google Drive file discussed below, none independently confirmed), and
+   South Korean/Egyptian coverage of the ICC Loyalty deal — not included
+   because nothing real turned up,
    not because the search wasn't tried. URLs are real and were returned by
    web search, but this
    sandbox could not perform the live HTTP status check itself (see **Link
@@ -96,7 +103,7 @@ search tool are reachable). That shaped two decisions:
    record as web-search-sourced rather than API-sourced.
 
 **On "1210+ social listings and 50+ mentions"**: 50+ real mentions turned
-out to be findable — the 72 raw / 47 distinct here clear it. 1210+ social
+out to be findable — the 76 raw / 47 distinct here clear it. 1210+ social
 listings did not, and realistically can't via web search: individual
 posts on X, Instagram and (mostly) LinkedIn aren't search-engine-indexed
 at the level of a specific status update — search surfaces a company's
