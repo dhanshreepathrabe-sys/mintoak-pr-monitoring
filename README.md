@@ -356,7 +356,7 @@ sources can be swapped in without touching the UI layer:
 | Interface | File | Replace with |
 |---|---|---|
 | `loadRawMentions()` | `js/data.js` | A real news/PR aggregation API — e.g. NewsAPI, Meltwater, Brandwatch, Google Alerts RSS, or a custom crawler — returning the same `{ id, source, sourceType, author, headline, snippet, url, publishedDate, domain, topic }` shape. |
-| `loadRawSocial()` | `js/data.js` | X API v2, LinkedIn Marketing API, YouTube Data API v3, Reddit API (PRAW/OAuth), Instagram Graph API — normalized to the `social.seed.json` shape (drop `metricsAvailable: false` once real engagement numbers are available). Filter out the account's own posts at the query level (e.g. exclude Mintoak's own author/account IDs) — this tab is for third-party listening, not a mirror of owned-channel output. |
+| `loadRawSocial()` | `js/data.js` | Already partially wired: the `SocialListeningAPI` connector (see **Social Listening API**) now supplies real posts and engagement numbers for X/LinkedIn/YouTube/Reddit on demand, and the daily refresh Routine calls it automatically when available. Full replacement still means a persistent job (not just once-daily) hitting X API v2, LinkedIn Marketing API, YouTube Data API v3, Reddit API, Instagram Graph API directly, normalized to the same `social.seed.json` shape. Filter out the account's own posts at the query level (e.g. exclude Mintoak's own author/account IDs) — this tab is for third-party listening, not a mirror of owned-channel output. |
 | `scoreSentiment(text)` | `js/sentiment.js` | A real NLP/LLM sentiment endpoint (must still return `{ label, confidence }`). |
 | `scripts/verify-links.mjs` | — | Already production-ready; just needs to run somewhere with outbound internet (cron/CI), on a schedule matching your refresh cadence. |
 | `SOV_COMPETITOR_BASELINE` | `js/data.js` | Replace the illustrative multiplier with a real named-competitor mention count from the same pipeline. |
@@ -406,25 +406,39 @@ daily) fires a fresh, standalone session each day that:
 
 1. Reads the current `data/mentions.seed.json` and `data/social.seed.json`
    to know what already exists (dedupes new finds against these by URL).
-2. Runs the same web-search queries described in **Data honesty** above,
-   looking for press coverage from roughly the last few days and new
-   public social posts, applying the same disambiguation/honesty rules
-   (real URLs only, no fabricated dates or engagement metrics, cap of ~8
-   new mentions per run).
+2. Checks whether the `SocialListeningAPI` connector (see **Social
+   Listening API** above) is available in that session. If it is: queries
+   X/LinkedIn/YouTube/Reddit and Google search for new, genuinely
+   third-party, on-topic posts and press mentions, recording real
+   engagement numbers where the platform returns them, filtered through
+   the same owned-channel exclusion and relevance rules used everywhere
+   else in this project. Either way (connector present or not), also runs
+   the same web-search queries described in **Data honesty** above,
+   looking for press coverage from roughly the last few days, applying
+   the same disambiguation/honesty rules (real URLs only, no fabricated
+   dates or engagement metrics, cap of ~8 new mentions per run combined).
 3. If anything genuinely new was found: runs `npm run build:artifact`,
    sanity-checks the rebuilt file, commits, pushes to
    `claude/mintoak-pr-dashboard-6mod92`, and republishes the same
    Artifact (`https://claude.ai/code/artifact/aa027e8f-0439-4fce-ba91-2835bbacfdf8`).
    If nothing new was found, it does nothing — no empty commits.
 
-**Known caveat, not yet verified:** the fired session's tool grant (echoed
-back when the trigger was created) listed Bash/git/WebSearch/file tools
-but not the `Artifact` tool explicitly. It may still work if the
-environment runs Routine sessions in a permissive mode, but this hasn't
-been confirmed against a real firing yet — check that the Artifact link
-actually updated after the first run, and if it didn't, the repo commits
-(steps 1–3 above) are the fallback signal that the crawl itself is
-working even if the last step silently failed.
+**Two known caveats, not yet fully verified:**
+- The fired session's tool grant (echoed back when the trigger was
+  created) listed Bash/git/WebSearch/file tools but not the `Artifact`
+  tool explicitly. The Routine's first real firing (2026-09-02) reached
+  the search step and correctly found nothing new that day, so it never
+  actually exercised the commit/publish steps — whether those work in a
+  fired session is still unconfirmed. Check that the Artifact link
+  actually updates after a run that *does* find something new; if it
+  doesn't, the repo commit (step 3, git side) is the fallback signal that
+  the crawl itself is working even if the last step silently failed.
+- Whether the `SocialListeningAPI` MCP connector (only added to this
+  interactive session mid-project) is available to a Routine's
+  independently-provisioned fired sessions at all is unverified — the
+  Routine prompt handles this gracefully (falls back to WebSearch-only
+  for that run) rather than failing, but that fallback path itself
+  hasn't been observed happening yet either.
 
 Manage the Routine like any other: `list_triggers` to check its last-run
 status, `update_trigger` to change the schedule or pause it, `fire_trigger`
